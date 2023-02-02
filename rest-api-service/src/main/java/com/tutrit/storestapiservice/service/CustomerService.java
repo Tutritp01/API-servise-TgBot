@@ -15,8 +15,8 @@ public class CustomerService {
 
     public Customer save(Customer customer) {
         customer.setCity("minsk");
-
-        return customerClient.save(customer);
+        customerClient.save(customer);
+        return customer;
     }
 
     public Customer findById(String id) {
