@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.tutrit</groupId>
-    <artifactId>sto-rest-api-service</artifactId>
+    <artifactId>rest-api-service</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
