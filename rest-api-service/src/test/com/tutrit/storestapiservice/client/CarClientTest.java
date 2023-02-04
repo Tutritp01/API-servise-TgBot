@@ -1,7 +1,7 @@
 package com.tutrit.storestapiservice.client;
 
 import com.tutrit.persistence.core.bean.Car;
-import com.tutrit.persistence.core.service.CarPersistence;
+import com.tutrit.persistence.core.persistence.CarPersistence;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
