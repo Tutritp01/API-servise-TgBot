@@ -1,4 +1,4 @@
-package com.tutrit.persistence.core.service;
+package com.tutrit.persistence.core.persistence;
 
 import com.tutrit.persistence.core.bean.Car;
 
