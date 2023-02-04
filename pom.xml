@@ -18,6 +18,7 @@
         <!--        Added you module to this block-->
         <module>rest-api-service</module>
         <module>persistence-core</module>
+        <module>util</module>
     </modules>
 
     <dependencyManagement>
