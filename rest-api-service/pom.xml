@@ -9,7 +9,6 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.tutrit</groupId>
     <artifactId>rest-api-service</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -19,6 +18,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,11 +30,8 @@
             <version>1.18.24</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
+
         <dependency>
             <groupId>com.tutrit</groupId>
             <artifactId>persistence-core</artifactId>
@@ -59,5 +56,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>in-memory-repository</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.tutrit</groupId>
+                    <artifactId>in-memory-repository</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>
