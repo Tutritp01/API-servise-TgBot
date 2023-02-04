@@ -33,6 +33,7 @@ class InMemoryUserPersistenceTest {
         User user = persistence.save(newUser());
         var actual = persistence.findById(user.getId());
         Assertions.assertThat(actual)
+        
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newUser());
