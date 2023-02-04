@@ -2,37 +2,55 @@ package com.tutrit.storestapiservice.client;
 
 import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.persistence.CarPersistence;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class CarClientTest {
-
-    @Mock
-    private CarPersistence carPersistence;
-
-    @InjectMocks
+    @Autowired
     private CarClient carClient;
 
+    @MockBean
+    private CarPersistence carPersistence;
+
     @Test
-    @DisplayName("Should throw an exception when the carpersistence is null")
-    void saveWhenCarPersistenceIsNullThenThrowException() {
-        assertThrows(NullPointerException.class, () -> carClient.save(new Car()));
+    void save() {
+        var car = makeVictim();
+        when(carPersistence.save(makeVictim())).thenReturn(makeExpected());
+        var actualCar = carClient.save(makeVictim());
+        assertEquals(makeExpected(), actualCar);
     }
 
     @Test
-    @DisplayName("Should save the car when the carpersistence is not null")
-    void saveWhenCarPersistenceIsNotNull() {
-        Car car = new Car();
-        when(carPersistence.save(car)).thenReturn(car);
-        assertEquals(car, carClient.save(car));
+    void findById() {
+        when(carPersistence.findById("2")).thenReturn(makeExpected());
+        var actualCar = carClient.findById("2");
+        assertEquals(makeExpected(), actualCar);
+    }
+
+    private Car makeVictim() {
+        var car = new Car();
+        car.setId("2");
+        return car;
+    }
+
+    private Car makeExpected() {
+        var car = new Car();
+        car.setId("2");
+        car.setOwner("Master");
+        car.setVin("123456789");
+        car.setPlateNumber("1111");
+        car.setBrand("Toyota");
+        car.setModel("Corolla");
+        car.setGeneration("I");
+        car.setModification("B");
+        car.setEngine("Benzin");
+        car.setYear(2010);
+        return car;
     }
 }

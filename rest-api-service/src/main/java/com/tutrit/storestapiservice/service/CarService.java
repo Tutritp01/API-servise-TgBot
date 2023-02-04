@@ -14,10 +14,13 @@ public class CarService {
     }
 
     public Car save(Car car) {
-        return null;
+        if (car.getId().equals("1")) {
+            car.setId("2");
+        }
+        return carClient.save(car);
     }
 
     public Car findById(String id) {
-        return null;
+        return carClient.findById(id);
     }
 }

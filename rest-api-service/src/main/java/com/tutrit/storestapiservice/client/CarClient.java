@@ -14,7 +14,7 @@ public class CarClient {
         return carPersistence.save(engineer);
     }
 
-    public Car findByName(String id) {
+    public Car findById(String id) {
         return carPersistence.findById(id);
     }
 }
