@@ -19,6 +19,7 @@
         <module>rest-api-service</module>
         <module>persistence-core</module>
         <module>in-memory-repository</module>
+        <module>filesystem-repository</module>
     </modules>
     <dependencies>
         <dependency>
