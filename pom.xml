@@ -18,7 +18,21 @@
         <!--        Added you module to this block-->
         <module>rest-api-service</module>
         <module>persistence-core</module>
+        <module>in-memory-repository</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 
     <dependencyManagement>
         <dependencies>
