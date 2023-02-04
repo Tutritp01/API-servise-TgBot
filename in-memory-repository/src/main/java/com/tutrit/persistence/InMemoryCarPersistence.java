@@ -40,6 +40,7 @@ public class InMemoryCarPersistence implements CarPersistence {
         }
         return car;
     }
+
     public boolean isContains(String id) {
         Car car = null;
         for (Car value : cars) {

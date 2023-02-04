@@ -24,7 +24,7 @@ public class InMemoryCustomerPersistence implements CustomerPersistence {
         } else {
             logger.info("Customers already exists");
         }
-            return customer;
+        return customer;
 
     }
 
