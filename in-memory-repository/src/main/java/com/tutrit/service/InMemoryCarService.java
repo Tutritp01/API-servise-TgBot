@@ -3,9 +3,11 @@ package com.tutrit.service;
 import com.tutrit.persistence.InMemoryCarPersistence;
 import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.service.CarService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InMemoryCarService implements CarService {
-    private InMemoryCarPersistence inMemoryCarPersistence;
+    private final InMemoryCarPersistence inMemoryCarPersistence;
 
     public InMemoryCarService(InMemoryCarPersistence inMemoryCarPersistence) {
         this.inMemoryCarPersistence = inMemoryCarPersistence;

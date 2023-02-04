@@ -3,9 +3,11 @@ package com.tutrit.service;
 import com.tutrit.persistence.InMemoryUserPersistence;
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.service.UserService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InMemoryUserService implements UserService {
-    private InMemoryUserPersistence inMemoryUserPersistence;
+    private final InMemoryUserPersistence inMemoryUserPersistence;
 
     public InMemoryUserService(InMemoryUserPersistence inMemoryUserPersistence) {
         this.inMemoryUserPersistence = inMemoryUserPersistence;
