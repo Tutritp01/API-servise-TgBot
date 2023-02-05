@@ -9,6 +9,7 @@
 <!--        <version>0.1.0-SNAPSHOT</version>-->
 <!--    </parent>-->
 
+    <groupId>com.tutrit</groupId>
     <artifactId>build-tool</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
