@@ -16,7 +16,7 @@ public class InMemoryEngineerPersistence implements EngineerPersistence {
         int returnIndex = 0;
         for (int i = 0; i < engineers.length; i++) {
             if (engineers[i] == null) {
-                engineer.setId(UUID.randomUUID().toString());
+                engineer.setEngineerId(UUID.randomUUID().toString());
                 returnIndex = i;
                 engineers[i] = engineer;
                 if ((i * 2) >= engineers.length) {
@@ -31,7 +31,7 @@ public class InMemoryEngineerPersistence implements EngineerPersistence {
     @Override
     public Engineer findById(String id) {
         for (Engineer engineerRepository : engineers) {
-            if (engineerRepository != null && engineerRepository.getId().equals(id)) {
+            if (engineerRepository != null && engineerRepository.getEngineerId().equals(id)) {
                 return engineerRepository;
             }
         }

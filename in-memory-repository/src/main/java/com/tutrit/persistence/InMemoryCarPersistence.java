@@ -3,8 +3,6 @@ package com.tutrit.persistence;
 import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.persistence.CarPersistence;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class InMemoryCarPersistence implements CarPersistence {
 
     @Override
     public Car save(Car car) {
-        car.setId(UUID.randomUUID().toString());
+        car.setCarId(UUID.randomUUID().toString());
         cars.add(car);
         return car;
     }
@@ -32,7 +30,7 @@ public class InMemoryCarPersistence implements CarPersistence {
                 throw new RuntimeException("Car not found!");
             }
             for (Car value : cars) {
-                if (id.equals(value.getId())) {
+                if (id.equals(value.getCarId())) {
                     car = value;
                 }
             }
@@ -45,7 +43,7 @@ public class InMemoryCarPersistence implements CarPersistence {
     public boolean isContains(String id) {
         Car car = null;
         for (Car value : cars) {
-            if (id.equals(value.getId())) {
+            if (id.equals(value.getCarId())) {
                 car = value;
             }
         }

@@ -17,7 +17,7 @@ public class InMemoryCustomerPersistence implements CustomerPersistence {
     @Override
     public Customer save(Customer customer) {
         if (!customers.contains(customer)) {
-            customer.setId(UUID.randomUUID().toString());
+            customer.setCustomerId(UUID.randomUUID().toString());
             customers.add(customer);
         } else {
             log.info("Customers already exists");
@@ -29,7 +29,7 @@ public class InMemoryCustomerPersistence implements CustomerPersistence {
     @Override
     public Customer findById(String id) {
         for (final Customer customer : customers) {
-            if (customer.getId().equals(id)) {
+            if (customer.getCustomerId().equals(id)) {
                 return customer;
             }
         }
