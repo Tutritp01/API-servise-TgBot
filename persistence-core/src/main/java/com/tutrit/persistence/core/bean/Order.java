@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    private String id;
+    private String orderId;
     private Customer customer;
     private User user;
     private Car car;
