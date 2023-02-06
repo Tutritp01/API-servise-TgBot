@@ -2,17 +2,15 @@ package com.tutrit.persistence;
 
 import com.tutrit.persistence.core.bean.Customer;
 import com.tutrit.persistence.core.persistence.CustomerPersistence;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.UUID;
 
-
+@Slf4j
 @Component
 public class InMemoryCustomerPersistence implements CustomerPersistence {
-    public static final Logger logger = LoggerFactory.getLogger("CustomerPersistence logger");
     private final static HashSet<Customer> customers = new HashSet<>();
 
 
@@ -22,7 +20,7 @@ public class InMemoryCustomerPersistence implements CustomerPersistence {
             customer.setId(UUID.randomUUID().toString());
             customers.add(customer);
         } else {
-            logger.info("Customers already exists");
+            log.info("Customers already exists");
         }
         return customer;
 

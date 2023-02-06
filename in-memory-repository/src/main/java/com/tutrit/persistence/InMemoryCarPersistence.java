@@ -2,6 +2,7 @@ package com.tutrit.persistence;
 
 import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.persistence.CarPersistence;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class InMemoryCarPersistence implements CarPersistence {
-    public static final Logger logger = LoggerFactory.getLogger("CarPersistence logger");
     private static final List<Car> cars = new ArrayList<>();
 
 
@@ -36,7 +37,7 @@ public class InMemoryCarPersistence implements CarPersistence {
                 }
             }
         } catch (RuntimeException e) {
-            logger.info("Car not found!");
+            log.info("Car not found!");
         }
         return car;
     }
