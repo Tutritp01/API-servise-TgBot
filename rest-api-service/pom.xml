@@ -11,7 +11,7 @@
 
     <artifactId>rest-api-service</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -27,10 +27,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <optional>true</optional>
         </dependency>
-
 
         <dependency>
             <groupId>com.tutrit</groupId>
@@ -57,18 +54,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>in-memory-repository</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.tutrit</groupId>
-                    <artifactId>in-memory-repository</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
-</project>
+   </project>
