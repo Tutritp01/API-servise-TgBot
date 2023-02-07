@@ -80,13 +80,13 @@ class CarControllerIntTest {
 
     private Car makeVictim() {
         var car = new Car();
-        car.setId("1");
+        car.setCarId("1");
         return car;
     }
 
     private Car makeExpected() {
         var car = new Car();
-        car.setId("2");
+        car.setCarId("2");
         car.setOwner("Master");
         car.setVin("123456789");
         car.setPlateNumber("1111");
@@ -101,7 +101,7 @@ class CarControllerIntTest {
 
     private Car makeCarBeforeSave() {
         var car = new Car();
-        car.setId("2");
+        car.setCarId("2");
         return car;
     }
 }
