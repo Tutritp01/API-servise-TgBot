@@ -21,7 +21,14 @@
         <module>in-memory-repository</module>
         <module>filesystem-repository</module>
     </modules>
+
     <dependencies>
+        <dependency>
+            <groupId>com.tutrit</groupId>
+            <artifactId>persistence-core</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
