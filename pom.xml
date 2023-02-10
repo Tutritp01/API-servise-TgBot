@@ -30,4 +30,52 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.1</version>
+                <inherited>false</inherited>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.7.0</version>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <id>checkstyle-aggregate</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>checkstyle-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <failsOnError>false</failsOnError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>verify-checkstyle-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>checkstyle-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <configLocation>${basedir}\checkstyle\checkstyle.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
