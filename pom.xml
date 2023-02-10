@@ -119,8 +119,6 @@
                         <goals>
                             <goal>checkstyle-aggregate</goal>
                         </goals>
-                        <configuration>
-                        </configuration>
                     </execution>
 
                     <execution>
