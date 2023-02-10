@@ -17,6 +17,9 @@
     <properties>
         <sonar.organization>tutritp01</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
+        <checkstyle.puppycrawl.version>10.7.0</checkstyle.puppycrawl.version>
     </properties>
 
     <modules>
@@ -50,7 +53,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -117,14 +120,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <inherited>false</inherited>
 
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.7.0</version>
+                        <version>${checkstyle.puppycrawl.version}</version>
                     </dependency>
                 </dependencies>
 
