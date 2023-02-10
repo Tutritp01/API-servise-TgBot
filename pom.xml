@@ -150,7 +150,7 @@
                 </executions>
 
                 <configuration>
-                    <configLocation>${basedir}/checkstyle/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                 </configuration>
             </plugin>
