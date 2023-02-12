@@ -20,6 +20,7 @@
         <module>persistence-core</module>
         <module>in-memory-repository</module>
         <module>filesystem-repository</module>
+        <module>util</module>
     </modules>
     <dependencies>
         <dependency>
@@ -37,6 +38,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.tutrit</groupId>
+                <artifactId>persistence-core</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
