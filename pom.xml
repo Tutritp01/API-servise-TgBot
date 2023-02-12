@@ -18,10 +18,17 @@
         <!--        Added you module to this block-->
         <module>rest-api-service</module>
         <module>persistence-core</module>
+        <module>util</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.tutrit</groupId>
+                <artifactId>persistence-core</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+                <scope>compile</scope>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
