@@ -162,6 +162,7 @@
                 <configuration>
                     <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
+                    <linkXRef>false</linkXRef>
                 </configuration>
             </plugin>
         </plugins>
