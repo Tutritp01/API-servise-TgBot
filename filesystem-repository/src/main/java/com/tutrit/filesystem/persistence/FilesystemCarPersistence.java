@@ -12,12 +12,12 @@ public class FilesystemCarPersistence implements CarPersistence {
     private static final List<Car> cars = new ArrayList<>();
 
     @Override
-    public Car save(Car car) throws RuntimeException {
-        return null;
+    public Car save(Car car) {
+        throw new NotImplementedException("Not Implemented");
     }
 
     @Override
-    public Car findById(String id) throws RuntimeException {
-        return null;
+    public Car findById(String id) {
+        throw new NotImplementedException("Not Implemented");
     }
 }

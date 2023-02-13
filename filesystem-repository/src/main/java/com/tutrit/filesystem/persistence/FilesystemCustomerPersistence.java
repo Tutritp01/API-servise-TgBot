@@ -12,12 +12,12 @@ public class FilesystemCustomerPersistence implements CustomerPersistence {
     private final static HashSet<Customer> customers = new HashSet<>();
 
     @Override
-    public Customer save(Customer customer) throws RuntimeException {
-        return null;
+    public Customer save(Customer customer) {
+        throw new NotImplementedException("Not Implemented");
     }
 
     @Override
-    public Customer findById(String id) throws RuntimeException {
-        return null;
+    public Customer findById(String id) {
+        throw new NotImplementedException("Not Implemented");
     }
 }

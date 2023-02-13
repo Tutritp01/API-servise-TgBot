@@ -12,12 +12,12 @@ public class FilesystemUserPersistence implements UserPersistence {
     private final static Map<String, User> userMap = new HashMap<>();
 
     @Override
-    public User save(User user) throws RuntimeException {
-        return null;
+    public User save(User user) {
+        throw new NotImplementedException("Not Implemented");
     }
 
     @Override
-    public User findById(String id) throws RuntimeException {
-        return null;
+    public User findById(String id) {
+        throw new NotImplementedException("Not Implemented");
     }
 }

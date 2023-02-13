@@ -9,12 +9,12 @@ public class FilesystemEngineerPersistence implements EngineerPersistence {
     public static final Engineer[] engineers = new Engineer[15];
 
     @Override
-    public Engineer save(Engineer engineer) throws RuntimeException {
-        return null;
+    public Engineer save(Engineer engineer) {
+        throw new NotImplementedException("Not Implemented");
     }
 
     @Override
-    public Engineer findById(String id) throws RuntimeException {
-        return null;
+    public Engineer findById(String id) {
+        throw new NotImplementedException("Not Implemented");
     }
 }
