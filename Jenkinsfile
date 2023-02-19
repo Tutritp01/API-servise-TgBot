@@ -1,9 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build core') {
             steps {
-               echo 'This is a minimal pipeline.'
+               sh 'mvn clean package -f ./persistence-core/pom.xml'
+            }
+        }
+        stage('Build all') {
+            steps {
+               sh 'mvn -DskipTests clean package'
+            }
+        }
+        stage('Unit Tests') {
+            steps {
+               sh 'mvn clean test'
             }
         }
     }
