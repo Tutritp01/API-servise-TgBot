@@ -21,8 +21,15 @@ class EngineerClientTest {
 
     @Test
     void save() {
-        when(engineerPersistence.save(makeDebut())).thenReturn(makeExpected());
-        var actualEngineer = engineerClient.save(makeDebut());
+        when(engineerPersistence.save(makeVictim(""))).thenReturn(makeExpected());
+        var actualEngineer = engineerClient.save(makeVictim(""));
+        assertEquals(makeExpected(), actualEngineer);
+    }
+
+    @Test
+    void update() {
+        when(engineerPersistence.save(makeVictim("1"))).thenReturn(makeExpected());
+        var actualEngineer = engineerClient.save(makeVictim("1"));
         assertEquals(makeExpected(), actualEngineer);
     }
 
@@ -39,9 +46,9 @@ class EngineerClientTest {
         assertEquals(new Engineer(), engineerClient.findById("2"));
     }
 
-    private Engineer makeDebut() {
+    private Engineer makeVictim(String id) {
         var engineer = new Engineer();
-        engineer.setId("1");
+        engineer.setId(id);
         return engineer;
     }
 

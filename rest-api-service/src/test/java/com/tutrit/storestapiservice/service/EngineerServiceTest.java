@@ -20,9 +20,15 @@ class EngineerServiceTest {
 
     @Test
     void save() {
-        var engineer = makeDebut();
-        when(engineerClient.save(makeEngineerBeforeSave())).thenReturn(makeExpected());
-        var actualEngineer = engineerService.save(engineer);
+        when(engineerClient.save(makeVictim(""))).thenReturn(makeExpected());
+        var actualEngineer = engineerService.save(makeVictim(""));
+        assertEquals(makeExpected(), actualEngineer);
+    }
+
+    @Test
+    void update() {
+        when(engineerClient.save(makeVictim("1"))).thenReturn(makeExpected());
+        var actualEngineer = engineerService.save(makeVictim("1"));
         assertEquals(makeExpected(), actualEngineer);
     }
 
@@ -35,19 +41,12 @@ class EngineerServiceTest {
 
     @Test
     void findByIdNull() {
-        var actualEngineer = engineerService.findById("2");
-        assertNull(actualEngineer);
+        assertNull(engineerService.findById("2"));
     }
 
-    private Engineer makeDebut() {
+    private Engineer makeVictim(String id) {
         var engineer = new Engineer();
-        engineer.setId("1");
-        return engineer;
-    }
-
-    private Engineer makeEngineerBeforeSave() {
-        var engineer = new Engineer();
-        engineer.setId("1");
+        engineer.setId(id);
         return engineer;
     }
 

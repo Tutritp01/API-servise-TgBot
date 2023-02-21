@@ -26,20 +26,22 @@ class EngineerControllerTest {
 
     @Test
     void postSave() {
-        when(engineerService.save(makeDebut())).thenReturn(makeExpected());
-        var actualEngineer = engineerController.postSave(makeDebut());
+        when(engineerService.save(makeVictim(""))).thenReturn(makeExpected());
+        var actualEngineer = engineerController.postSave(makeVictim(""));
+        assertEquals(makeExpected(), actualEngineer);
+        when(engineerService.save(makeVictim("1"))).thenReturn(makeExpected());
         assertEquals(makeExpected(), actualEngineer);
     }
 
-    private Engineer makeDebut() {
+    private Engineer makeVictim(String id) {
         var engineer = new Engineer();
-        engineer.setId("1");
+        engineer.setId(id);
         return engineer;
     }
 
     private Engineer makeExpected() {
         var engineer = new Engineer();
-        engineer.setId("2");
+        engineer.setId("1");
         engineer.setFirstName("Oleg");
         engineer.setLastName("Ivanov");
         engineer.setFunction("Master");
