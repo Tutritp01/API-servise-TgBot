@@ -10,11 +10,11 @@ public class EngineerClient {
     @Autowired(required = false)
     private EngineerPersistence engineerPersistence;
 
-    public final Engineer save(final Engineer engineer) {
+    public Engineer save(final Engineer engineer) {
         return engineerPersistence.save(engineer);
     }
 
-    public final Engineer findById(final String id) {
+    public Engineer findById(final String id) {
         return engineerPersistence.findById(id).orElseGet(Engineer::new);
     }
 }

@@ -51,18 +51,18 @@ class EngineerControllerIntegrationTest {
         var body = result.getResponse().getContentAsString();
         var actualEngineer = objectMapper.readValue(body, Engineer.class);
         assertEquals(makeExpected(), actualEngineer);
-        Mockito.verify(engineerService).findById("1");
-        Mockito.verify(engineerClient).findById("1");
-        Mockito.verify(engineerPersistence).findById("1");
+        Mockito.verify(engineerService, times(1)).findById("1");
+        Mockito.verify(engineerClient, times(1)).findById("1");
+        Mockito.verify(engineerPersistence,times(1)).findById("1");
     }
 
     @Test
-    void postSave() throws Exception {
-        when(engineerPersistence.save(makeDebut())).thenReturn(makeExpected());
+    void postUpdate() throws Exception {
+        when(engineerPersistence.save(makeVictim("1"))).thenReturn(makeExpected());
         final MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.post("/engineers")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(makeDebut())))
+                        .content(objectMapper.writeValueAsString(makeVictim("1"))))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -74,9 +74,27 @@ class EngineerControllerIntegrationTest {
         Mockito.verify(engineerPersistence, times(1)).save(any());
     }
 
-    private Engineer makeDebut() {
+    @Test
+    void postSave() throws Exception {
+        when(engineerPersistence.save(makeVictim(""))).thenReturn(makeExpected());
+        final MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.post("/engineers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(makeVictim(""))))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+        var body = result.getResponse().getContentAsString();
+        var actualEngineer = objectMapper.readValue(body, Engineer.class);
+        assertEquals(makeExpected(), actualEngineer);
+        Mockito.verify(engineerService, times(1)).save(any());
+        Mockito.verify(engineerClient, times(1)).save(any());
+        Mockito.verify(engineerPersistence, times(1)).save(any());
+    }
+
+    private Engineer makeVictim(String id) {
         var engineer = new Engineer();
-        engineer.setId("1");
+        engineer.setId(id);
         return engineer;
     }
 
