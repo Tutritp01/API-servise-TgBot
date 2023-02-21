@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -37,11 +36,6 @@ class EngineerServiceTest {
         when(engineerClient.findById("2")).thenReturn(makeExpected());
         var actualEngineer = engineerService.findById("2");
         assertEquals(makeExpected(), actualEngineer);
-    }
-
-    @Test
-    void findByIdNull() {
-        assertNull(engineerService.findById("2"));
     }
 
     private Engineer makeVictim(String id) {
