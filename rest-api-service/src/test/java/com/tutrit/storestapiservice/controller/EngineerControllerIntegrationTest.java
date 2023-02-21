@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -40,7 +42,7 @@ class EngineerControllerIntegrationTest {
 
     @Test
     void getById() throws Exception {
-        when(engineerPersistence.findById("1")).thenReturn(makeExpected());
+        when(engineerPersistence.findById("1")).thenReturn(makeExpectedOptional());
         final MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.get("/engineers/1"))
                 .andDo(MockMvcResultHandlers.print())
@@ -89,5 +91,9 @@ class EngineerControllerIntegrationTest {
         engineer.setExperience(5);
         engineer.setGeneralExperience(10);
         return engineer;
+    }
+
+    private Optional<Engineer> makeExpectedOptional() {
+        return Optional.of(makeExpected());
     }
 }

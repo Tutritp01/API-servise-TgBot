@@ -10,15 +10,11 @@ public class EngineerClient {
     @Autowired(required = false)
     private EngineerPersistence engineerPersistence;
 
-    public Engineer save(Engineer engineer) {
+    public final Engineer save(final Engineer engineer) {
         return engineerPersistence.save(engineer);
     }
 
-    public Engineer findById(String id) {
-        try {
-            return engineerPersistence.findById(id);
-        } catch (RuntimeException e) {
-            return new Engineer();
-        }
+    public final Engineer findById(final String id) {
+        return engineerPersistence.findById(id).orElseGet(Engineer::new);
     }
 }
