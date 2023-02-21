@@ -1,11 +1,10 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven3.9.0'
+        jdk 'openjdk-19.0.2'
+    }
     stages {
-        stage('Build core') {
-            steps {
-               sh 'mvn clean package -f ./persistence-core/pom.xml'
-            }
-        }
         stage('Build all') {
             steps {
                sh 'mvn -DskipTests clean package'
