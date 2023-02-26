@@ -36,7 +36,7 @@ class CustomerClientTest {
     private Customer createNewCustomer() {
         var customer = new Customer();
         customer.setName("Vasylyi");
-        customer.setId("1");
+        customer.setCustomerId("1");
         customer.setCity("Brest");
         customer.setEmail("VasilBrest@mail.by");
         customer.setPhoneNumber("+375334573385");
@@ -52,7 +52,7 @@ class CustomerClientTest {
     private Customer expectedCustomer() {
         var customer = new Customer();
         customer.setName("Yanki");
-        customer.setId("1");
+        customer.setCustomerId("1");
         customer.setCity("Brest");
         customer.setEmail("VasilBrest@mail.by");
         customer.setPhoneNumber("+375334573385");

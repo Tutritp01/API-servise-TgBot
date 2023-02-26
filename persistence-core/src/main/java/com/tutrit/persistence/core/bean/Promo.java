@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Promo {
-    private String id;
+    private String promoId;
     private int discount;
     private String namePromo;
     private LocalDateTime timeStamp;

@@ -35,13 +35,13 @@ class CarClientTest {
 
     private Car makeVictim() {
         var car = new Car();
-        car.setId("2");
+        car.setCarId("2");
         return car;
     }
 
     private Car makeExpected() {
         var car = new Car();
-        car.setId("2");
+        car.setCarId("2");
         car.setOwner("Master");
         car.setVin("123456789");
         car.setPlateNumber("1111");

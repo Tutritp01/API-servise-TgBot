@@ -33,7 +33,7 @@ class UserClientTest {
 
     private User createNewUser() {
         var user = new User();
-        user.setId("1");
+        user.setUserId("1");
         user.setName("Bob");
         user.setPhoneNumber("+375121212121");
         return user;
@@ -47,7 +47,7 @@ class UserClientTest {
 
     private User expectedUser() {
         var user = new User();
-        user.setId("1");
+        user.setUserId("1");
         user.setName("Ignat");
         user.setPhoneNumber("+375121212121");
         return user;
