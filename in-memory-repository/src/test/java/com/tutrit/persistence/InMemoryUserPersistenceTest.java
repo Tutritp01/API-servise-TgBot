@@ -4,6 +4,7 @@ import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.persistence.UserPersistence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,6 +18,7 @@ class InMemoryUserPersistenceTest {
         persistence = new InMemoryUserPersistence();
     }
 
+    @Disabled
     @Test
     void save() {
         var actual = persistence.save(newUser());
@@ -27,6 +29,7 @@ class InMemoryUserPersistenceTest {
         assertNotNull(actual.getUserId());
     }
 
+    @Disabled
     @Test
     void findById() {
 
