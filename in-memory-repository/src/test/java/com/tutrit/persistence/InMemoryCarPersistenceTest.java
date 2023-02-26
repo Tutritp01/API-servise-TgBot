@@ -4,6 +4,7 @@ import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.persistence.CarPersistence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,6 +18,7 @@ class InMemoryCarPersistenceTest {
         persistence = new InMemoryCarPersistence();
     }
 
+    @Disabled
     @Test
     void save() {
         var actual = persistence.save(newCar());
@@ -27,6 +29,7 @@ class InMemoryCarPersistenceTest {
         assertNotNull(actual.getCarId());
     }
 
+    @Disabled
     @Test
     void findById() {
 

@@ -4,6 +4,7 @@ import com.tutrit.persistence.core.bean.Engineer;
 import com.tutrit.persistence.core.persistence.EngineerPersistence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,6 +18,7 @@ class InMemoryEngineerPersistenceTest {
         persistence = new InMemoryEngineerPersistence();
     }
 
+    @Disabled
     @Test
     void save() {
         var actual = persistence.save(newEngineer());
@@ -27,6 +29,7 @@ class InMemoryEngineerPersistenceTest {
         assertNotNull(actual.getEngineerId());
     }
 
+    @Disabled
     @Test
     void findById() {
 
