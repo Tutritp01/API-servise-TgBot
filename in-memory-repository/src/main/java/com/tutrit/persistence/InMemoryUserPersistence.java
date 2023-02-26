@@ -14,8 +14,8 @@ public class InMemoryUserPersistence implements UserPersistence {
 
     @Override
     public User save(User user) {
-        user.setId(UUID.randomUUID().toString());
-        userMap.put(user.getId(), user);
+        user.setUserId(UUID.randomUUID().toString());
+        userMap.put(user.getUserId(), user);
         return user;
     }
 

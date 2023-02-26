@@ -26,25 +26,25 @@ class InMemoryEngineerServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newEngineer());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getEngineerId());
     }
 
     @Test
     void findById() {
 
         Engineer engineer = engineerService.saveEngineer(newEngineer());
-        var actual = engineerService.getEngineer(engineer.getId());
+        var actual = engineerService.getEngineer(engineer.getEngineerId());
         Assertions.assertThat(actual)
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newEngineer());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getEngineerId());
     }
 
     private Engineer newEngineer() {
         var engineer = new Engineer();
         engineer.setCategory("First");
-        engineer.setId("1");
+        engineer.setEngineerId("1");
         engineer.setEducation("Higher");
         engineer.setExperience(3);
         engineer.setGeneralExperience(10);

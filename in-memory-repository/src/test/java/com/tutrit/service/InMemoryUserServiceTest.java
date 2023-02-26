@@ -27,25 +27,25 @@ class InMemoryUserServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newUser());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getUserId());
     }
 
     @Test
     void findById() {
 
         User user = userService.saveUser(newUser());
-        var actual = userService.getUser(user.getId());
+        var actual = userService.getUser(user.getUserId());
         Assertions.assertThat(actual)
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newUser());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getUserId());
     }
 
     private User newUser() {
         var user = new User();
         user.setName("Vasylyi");
-        user.setId("1");
+        user.setUserId("1");
         user.setPhoneNumber("+375334573385");
         return user;
     }

@@ -11,7 +11,7 @@
 
     <artifactId>rest-api-service</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -27,10 +27,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <optional>true</optional>
         </dependency>
-
 
         <dependency>
             <groupId>com.tutrit</groupId>
@@ -45,42 +42,24 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>in-memory-repository</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.tutrit</groupId>
-                    <artifactId>in-memory-repository</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>filesystem-repository</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.tutrit</groupId>
-                    <artifactId>filesystem-repository</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 
 </project>

@@ -27,24 +27,24 @@ class InMemoryCarServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newCar());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getCarId());
     }
 
     @Test
     void findById() {
 
         Car car = carService.saveCar(newCar());
-        var actual = carService.getCar(car.getId());
+        var actual = carService.getCar(car.getCarId());
         Assertions.assertThat(actual)
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(newCar());
-        assertNotNull(actual.getId());
+        assertNotNull(actual.getCarId());
     }
 
     private Car newCar() {
         var car = new Car();
-        car.setId("2");
+        car.setCarId("2");
         car.setOwner("Master");
         car.setVin("23456789");
         car.setPlateNumber("1111");
