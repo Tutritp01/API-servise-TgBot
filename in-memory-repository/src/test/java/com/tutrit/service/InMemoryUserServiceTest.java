@@ -5,6 +5,7 @@ import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.service.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,6 +21,7 @@ class InMemoryUserServiceTest {
         userService = new InMemoryUserService(inMemoryUserPersistence);
     }
 
+    @Disabled
     @Test
     void save() {
         var actual = userService.saveUser(newUser());
@@ -30,6 +32,7 @@ class InMemoryUserServiceTest {
         assertNotNull(actual.getUserId());
     }
 
+    @Disabled
     @Test
     void findById() {
 

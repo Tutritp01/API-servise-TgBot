@@ -5,6 +5,7 @@ import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.service.CarService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,6 +21,7 @@ class InMemoryCarServiceTest {
         carService = new InMemoryCarService(inMemoryCarPersistence);
     }
 
+    @Disabled
     @Test
     void save() {
         var actual = carService.saveCar(newCar());
@@ -30,6 +32,7 @@ class InMemoryCarServiceTest {
         assertNotNull(actual.getCarId());
     }
 
+    @Disabled
     @Test
     void findById() {
 

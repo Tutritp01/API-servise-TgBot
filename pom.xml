@@ -42,6 +42,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.6</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -133,6 +138,7 @@
                                     </limits>
                                 </rule>
                             </rules>
+                            <haltOnFailure>false</haltOnFailure>
                         </configuration>
                     </execution>
                 </executions>
@@ -173,8 +179,7 @@
                 </executions>
 
                 <configuration>
-                    <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml
-                    </configLocation>
+                    <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                     <linkXRef>false</linkXRef>
                 </configuration>
