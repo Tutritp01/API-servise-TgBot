@@ -34,7 +34,7 @@ class UserControllerTest {
 
     private User createNewUser() {
         var user = new User();
-        user.setId("1");
+        user.setUserId("1");
         user.setName("Ignat");
         user.setPhoneNumber("+1");
         return user;
@@ -43,7 +43,7 @@ class UserControllerTest {
 
     private User expectedUser() {
         var user = new User();
-        user.setId("1");
+        user.setUserId("1");
         user.setName("Ignat");
         user.setPhoneNumber("+375121212121");
         return user;
