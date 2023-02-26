@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
-    private String id;
+    private String messageId;
     private String eventText;
     private LocalDateTime timestamp;
     private LocalDateTime startDate;

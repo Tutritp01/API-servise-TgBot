@@ -14,8 +14,8 @@ public class CarService {
     }
 
     public Car save(Car car) {
-        if (car.getId().equals("1")) {
-            car.setId("2");
+        if (car.getCarId().equals("1")) {
+            car.setCarId("2");
         }
         return carClient.save(car);
     }
