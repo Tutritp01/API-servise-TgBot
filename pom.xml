@@ -26,7 +26,7 @@
         <module>util</module>
         <module>persistence-core</module>
         <module>in-memory-repository</module>
-        <module>integration</module>
+        <module>api-service-distributive</module>
         <module>rest-api-service</module>
     </modules>
 
@@ -48,6 +48,21 @@
             <version>2.0.6</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>main</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>api-service-distributive</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>make_runnable</id>
+        </profile>
+    </profiles>
 
     <dependencyManagement>
         <dependencies>
@@ -179,7 +194,8 @@
                 </executions>
 
                 <configuration>
-                    <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml</configLocation>
+                    <configLocation>${basedir}${file.separator}checkstyle${file.separator}checkstyle.xml
+                    </configLocation>
                     <consoleOutput>true</consoleOutput>
                     <linkXRef>false</linkXRef>
                 </configuration>
