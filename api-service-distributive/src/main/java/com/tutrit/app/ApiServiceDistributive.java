@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.tutrit")
-public class ApplicationRun {
+public class ApiServiceDistributive {
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationRun.class, args);
+        SpringApplication.run(ApiServiceDistributive.class, args);
 
     }
 }
