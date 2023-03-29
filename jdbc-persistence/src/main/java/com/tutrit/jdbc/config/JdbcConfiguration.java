@@ -3,11 +3,13 @@ package com.tutrit.jdbc.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
-@Configuration
+@Component
+@PropertySource("classpath:application.properties")
 public class JdbcConfiguration {
     @Value("${db.url}")
     private String url;
