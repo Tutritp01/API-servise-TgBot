@@ -1,50 +1,112 @@
 package com.tutrit.jdbc.repository;
 
+
+import com.tutrit.jdbc.config.SpringContext;
 import com.tutrit.persistence.core.bean.User;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.sql.DataSource;
+import java.sql.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserRepositoryTest {
-    private static final User ACTUAL_USER = new User("1", "James Hetfield", "+1 123-456-7890");
-
-    @Autowired
+    @Mock
+    private DataSource dataSource;
+    @Mock
+    private Connection connection;
+    @Mock
+    private PreparedStatement statement;
+    @Mock
+    private ResultSet resultSet;
     private UserRepository userRepository;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() throws SQLException {
+        userRepository = new UserRepository(dataSource);
+
+        when(dataSource.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(any(String.class))).thenReturn(statement);
+    }
+
+    @AfterEach
+    public void end() throws SQLException {
+        verify(connection).close();
+        verify(statement).close();
+    }
+    private User actualUser(){
+        User user = new User();
+        user.setUserId("1");
+        user.setName("Alice");
+        user.setPhoneNumber("555-1234");
+        return user;
+    }
+
+    @Test
+    void save() throws SQLException {
+        when(connection.prepareStatement(anyString(), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(statement);
+        when(statement.executeUpdate()).thenReturn(1);
+        when(statement.getGeneratedKeys()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true);
+        when(resultSet.getString("id")).thenReturn("66");
+
+        User savedUser = userRepository.save(actualUser());
+
+        verify(statement).setString(1, "Alice");
+        verify(statement).setString(2, "555-1234");
+        verify(statement).executeUpdate();
+
+        assertEquals("66", savedUser.getUserId());
+        assertNotNull(savedUser.getUserId());
+    }
+
+    @Test
+    void findById() throws SQLException {
+        when(statement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true);
+
+        when(resultSet.getString("id")).thenReturn("1");
+        when(resultSet.getString("name")).thenReturn("Alice");
+        when(resultSet.getString("phone_number")).thenReturn("555-1234");
+
+        User expectedUser = userRepository.findById("1");
+
+        verify(statement).setString(1, "1");
+        verify(statement).executeQuery();
+        verify(resultSet).next();
+        verify(resultSet).getString("name");
+        verify(resultSet).getString("phone_number");
+
+        assertEquals(expectedUser, actualUser());
+    }
+
+    @Test
+    void testUpdate() throws SQLException {
+        userRepository.update(actualUser());
+
+        verify(statement).setString(1, "Alice");
+        verify(statement).setString(2, "555-1234");
+        verify(statement).setString(3, "1");
+        verify(statement).executeUpdate();
+
+    }
+
+    @Test
+    void testDeleteById() throws SQLException {
         userRepository.deleteById("1");
-    }
 
-    @Test
-    void save() {
-        userRepository.save(ACTUAL_USER);
-        assertEquals(ACTUAL_USER, userRepository.findById("1"));
-    }
+        verify(statement).setString(1, "1");
+        verify(statement).executeUpdate();
 
-    @Test
-    void findById() {
-        userRepository.save(ACTUAL_USER);
-        assertEquals(ACTUAL_USER, userRepository.findById("1"));
-    }
 
-    @Test
-    void update() {
-        userRepository.save(ACTUAL_USER);
-        userRepository.update(ACTUAL_USER);
-        userRepository.findById("1");
-        assertEquals(ACTUAL_USER, userRepository.findById("1"));
-    }
-
-    @Test
-    void deleteById() {
-        userRepository.save(ACTUAL_USER);
-        userRepository.deleteById("1");
-        assertFalse(userRepository.deleteById("1"));
     }
 }

@@ -20,13 +20,19 @@ public class UserRepository implements UserPersistence {
 
     @Override
     public User save(User user) {
-        String query = "INSERT INTO sto.users (id, name, phone_number) VALUES (?, ?, ?)";
+        String query = "INSERT INTO sto.users ( name, phone_number) VALUES ( ?, ?)";
+
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, user.getUserId());
-            ps.setString(2, user.getName());
-            ps.setString(3, user.getPhoneNumber());
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPhoneNumber());
+
             ps.executeUpdate();
+
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                user.setUserId(generatedKeys.getString("id"));
+            }
             return user;
         } catch (SQLException e) {
             throw new RuntimeException("Error saving user to database: " + e.getMessage(), e);
@@ -39,17 +45,19 @@ public class UserRepository implements UserPersistence {
         String query = "SELECT name, phone_number FROM sto.users WHERE id = ?";
 
         try (Connection con = dataSource.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
+             PreparedStatement ps = con.prepareStatement(query)
+        ) {
             ps.setString(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                User user = new User();
-                if (rs.next()) {
-                    user.setUserId(id);
-                    user.setName(rs.getString("name"));
-                    user.setPhoneNumber(rs.getString("phone_number"));
-                }
-                return user;
+
+            ResultSet rs = ps.executeQuery();
+            User user = new User();
+            if (rs.next()) {
+                user.setUserId(id);
+                user.setName(rs.getString("name"));
+                user.setPhoneNumber(rs.getString("phone_number"));
             }
+            return user;
+
         } catch (SQLException e) {
             throw new RuntimeException("Error finding user to database: " + e.getMessage(), e);
         }
@@ -74,11 +82,10 @@ public class UserRepository implements UserPersistence {
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, id);
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user to database: " + e.getMessage(), e);
         }
-        return false;
     }
 
 }
