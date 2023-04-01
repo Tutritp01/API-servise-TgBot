@@ -9,16 +9,16 @@ import javax.sql.DataSource;
 
 @Component
 public class JdbcConfiguration {
-    @Value("${db.url}")
+    @Value("${db.url:jdbc:mysql://localhost:3306/default_db}")
     private String url;
 
-    @Value("${db.username}")
+    @Value("${db.username:root}")
     private String username;
 
-    @Value("${db.password}")
+    @Value("${db.password:password}")
     private String password;
 
-    @Value("${db.driverClassName}")
+    @Value("${db.driverClassName:com.mysql.cj.jdbc.Driver}")
     private String driverClassName;
 
     @Bean
