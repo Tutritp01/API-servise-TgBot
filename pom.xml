@@ -28,6 +28,7 @@
         <module>in-memory-repository</module>
         <module>api-service-distributive</module>
         <module>rest-api-service</module>
+        <module>liquibase</module>
         <module>jdbc-persistence</module>
     </modules>
 
