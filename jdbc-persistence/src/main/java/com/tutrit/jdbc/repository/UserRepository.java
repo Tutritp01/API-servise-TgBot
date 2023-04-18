@@ -2,6 +2,7 @@ package com.tutrit.jdbc.repository;
 
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.persistence.UserPersistence;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -11,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
+@Primary
 public class UserRepository implements UserPersistence {
     private final DataSource dataSource;
 
