@@ -20,10 +20,10 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder.create()
-                .driverClassName(environment.getProperty("jdbc.driverClassName"))
-                .url(environment.getProperty("jdbc.url"))
-                .username(environment.getProperty("jdbc.username"))
-                .password(environment.getProperty("jdbc.password"))
+                .driverClassName(environment.getProperty("jdbc.driverClassName", "com.mysql.cj.jdbc.Driver"))
+                .url(environment.getProperty("jdbc.url", "jdbc:mysql://localhost:3306/url"))
+                .username(environment.getProperty("jdbc.username", "username"))
+                .password(environment.getProperty("jdbc.password", "password"))
                 .build();
     }
 
