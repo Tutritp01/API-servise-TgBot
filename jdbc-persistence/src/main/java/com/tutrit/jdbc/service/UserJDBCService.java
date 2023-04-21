@@ -1,13 +1,13 @@
 package com.tutrit.jdbc.service;
 
 
+import com.tutrit.jdbc.entity.User;
 import com.tutrit.jdbc.repository.UserRepository;
-import com.tutrit.persistence.core.bean.User;
-import com.tutrit.persistence.core.service.UserService;
 import org.springframework.stereotype.Service;
 
+
 @Service
-public class UserJDBCService implements UserService {
+public class UserJDBCService implements DTOService {
 
     private final UserRepository userRepository;
 
@@ -19,15 +19,15 @@ public class UserJDBCService implements UserService {
         return userRepository.save(user);
     }
     @Override
-    public User getUser(String id) {
+    public User findById(Long id) {
         return userRepository.findById(id);
     }
-
-    public void update(User user) {
+    @Override
+    public void updateUser(User user) {
         userRepository.update(user);
     }
-
-    public void deleteById(String id) {
+    @Override
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 

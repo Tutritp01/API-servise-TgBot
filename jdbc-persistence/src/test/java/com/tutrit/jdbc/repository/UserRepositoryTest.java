@@ -2,7 +2,7 @@ package com.tutrit.jdbc.repository;
 
 
 import com.tutrit.jdbc.config.SpringContext;
-import com.tutrit.persistence.core.bean.User;
+import com.tutrit.jdbc.entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ class UserRepositoryTest {
     }
     private User actualUser(){
         User user = new User();
-        user.setUserId("1");
+        user.setUserId(1L);
         user.setName("Alice");
         user.setPhoneNumber("555-1234");
         return user;
@@ -57,7 +57,7 @@ class UserRepositoryTest {
         when(statement.executeUpdate()).thenReturn(1);
         when(statement.getGeneratedKeys()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
-        when(resultSet.getString("id")).thenReturn("66");
+        when(resultSet.getLong(1)).thenReturn(66L);
 
         User savedUser = userRepository.save(actualUser());
 
@@ -65,7 +65,7 @@ class UserRepositoryTest {
         verify(statement).setString(2, "555-1234");
         verify(statement).executeUpdate();
 
-        assertEquals("66", savedUser.getUserId());
+        assertEquals(66L, savedUser.getUserId());
         assertNotNull(savedUser.getUserId());
     }
 
@@ -74,13 +74,13 @@ class UserRepositoryTest {
         when(statement.executeQuery()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
 
-        when(resultSet.getString("id")).thenReturn("1");
+        when(resultSet.getLong(1)).thenReturn(1L);
         when(resultSet.getString("name")).thenReturn("Alice");
         when(resultSet.getString("phone_number")).thenReturn("555-1234");
 
-        User expectedUser = userRepository.findById("1");
+        User expectedUser = userRepository.findById(1L);
 
-        verify(statement).setString(1, "1");
+        verify(statement).setLong(1, 1L);
         verify(statement).executeQuery();
         verify(resultSet).next();
         verify(resultSet).getString("name");
@@ -95,16 +95,16 @@ class UserRepositoryTest {
 
         verify(statement).setString(1, "Alice");
         verify(statement).setString(2, "555-1234");
-        verify(statement).setString(3, "1");
+        verify(statement).setLong(3, 1L);
         verify(statement).executeUpdate();
 
     }
 
     @Test
     void testDeleteById() throws SQLException {
-        userRepository.deleteById("1");
+        userRepository.deleteById(1L);
 
-        verify(statement).setString(1, "1");
+        verify(statement).setLong(1, 1L);
         verify(statement).executeUpdate();
 
 
