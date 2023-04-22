@@ -2,14 +2,12 @@ package com.tutrit.jdbc.repository;
 
 
 import com.tutrit.jdbc.entity.User;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
 @Component
-@Primary
 public class UserRepository implements UserDAO {
     private final DataSource dataSource;
 
@@ -20,7 +18,7 @@ public class UserRepository implements UserDAO {
     @Override
     public User save(User user) {
         String query = """
-                INSERT INTO sto.users ( name, phone_number) 
+                INSERT INTO users ( name, phone_number) 
                 VALUES (?, ?)
                 """;
 
@@ -70,7 +68,7 @@ public class UserRepository implements UserDAO {
 
     public void update(User user) {
         String query = """
-                UPDATE sto.users 
+                UPDATE users 
                 SET name=?, phone_number=? 
                 WHERE id=?
                 """;
@@ -91,8 +89,8 @@ public class UserRepository implements UserDAO {
     @Override
     public boolean deleteById(Long id) {
         String query = """
-                DELETE FROM sto.users 
-                WHERE id=?
+                DELETE FROM users 
+                WHERE id = ?
                 """;
 
         try (Connection con = dataSource.getConnection();
