@@ -44,7 +44,7 @@ public class UserRepository implements UserDAO {
     public User findById(Long id) {
         String query = """
                 SELECT name, phone_number 
-                FROM sto.users 
+                FROM users 
                 WHERE id = ?
                 """;
 

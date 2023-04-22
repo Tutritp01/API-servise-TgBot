@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
@@ -14,10 +15,9 @@ import javax.sql.DataSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-//@Sql(scripts = "classpath:/create-tables.sql")
+@Sql(scripts = "classpath:/create-tables.sql")
 @SpringBootTest(classes = SpringContext.SpringConfig.class)
 @ActiveProfiles("test")
-@Transactional
 class UserRepositoryWithDockerContainerTest {
     @Autowired
     private DataSource dataSource;
@@ -36,6 +36,7 @@ class UserRepositoryWithDockerContainerTest {
     @Test
     void testSave() {
         assertEquals(expectedUser, user);
+
     }
 
     @Test
