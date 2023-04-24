@@ -28,6 +28,7 @@
         <module>in-memory-repository</module>
         <module>api-service-distributive</module>
         <module>rest-api-service</module>
+        <module>liquibase</module>
         <module>jdbc-persistence</module>
     </modules>
 
@@ -54,21 +55,6 @@
             <version>2.0.6</version>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>main</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>api-service-distributive</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>make_runnable</id>
-        </profile>
-    </profiles>
 
     <dependencyManagement>
         <dependencies>

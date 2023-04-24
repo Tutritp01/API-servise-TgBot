@@ -37,6 +37,11 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.tutrit</groupId>
+            <artifactId>liquibase</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
