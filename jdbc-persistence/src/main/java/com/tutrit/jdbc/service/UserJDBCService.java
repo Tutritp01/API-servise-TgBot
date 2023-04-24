@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserJDBCService implements DTOService {
+public class UserJDBCService implements DAOService {
 
     private final UserRepository userRepository;
 

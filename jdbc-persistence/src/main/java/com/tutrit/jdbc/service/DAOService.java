@@ -2,7 +2,7 @@ package com.tutrit.jdbc.service;
 
 import com.tutrit.jdbc.entity.User;
 
-public interface DTOService {
+public interface DAOService {
 
     User saveUser(User user);
 
