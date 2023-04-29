@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserRepositoryJdbcTemplateIT {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate ;
     private UserRepositoryJdbcTemplate userRepositoryJdbcTemplate;
     private User expectedUser;
     public static final MySQLContainer<?> container = new MySQLContainer<>("mysql:8.0.33");
