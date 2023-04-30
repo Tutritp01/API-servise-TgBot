@@ -1,12 +1,10 @@
 package com.tutrit.jdbcTemplate.repository;
 
 import com.tutrit.jdbcTemplate.entity.User;
-import com.tutrit.jdbcTemplate.entity.UserRowMapper;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 import static java.util.Objects.requireNonNull;
@@ -49,30 +47,26 @@ public class UserRepositoryJdbcTemplate implements UserJdbcTemplate {
     }
 
     @Override
-    public boolean update(User user) {
+    public boolean update(Long id, User user) {
         String query = """
                 UPDATE users 
                 SET name=?, phone_number=? 
                 WHERE id=?
                 """;
-        return jdbcTemplate.update(
-                query,
-                user.getName(),
-                user.getPhoneNumber(),
-                user.getUserId()
-        ) > 0;
+        return jdbcTemplate.update(query, user.getName(), user.getPhoneNumber(), id) > 0;
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public User findById(Long id) {
         String query = """
-                SELECT id,name, phone_number 
+                SELECT * 
                 FROM users 
                 WHERE id = ?
                 """;
-        return jdbcTemplate.query(query, new UserRowMapper(), id)
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(User.class), id)
                 .stream()
-                .findFirst();
+                .findAny()
+                .orElse(null);
     }
 
 }

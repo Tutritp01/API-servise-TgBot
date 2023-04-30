@@ -14,8 +14,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.MySQLContainer;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +24,7 @@ class UserRepositoryJdbcTemplateIT {
     @Autowired
     private JdbcTemplate jdbcTemplate ;
     private UserRepositoryJdbcTemplate userRepositoryJdbcTemplate;
-    private User expectedUser;
+
     public static final MySQLContainer<?> container = new MySQLContainer<>("mysql:8.0.33");
     private static final User user = new User("Tomi Hendrix", "555-12345");
 
@@ -43,38 +41,46 @@ class UserRepositoryJdbcTemplateIT {
     @BeforeEach
     void setUp() {
         userRepositoryJdbcTemplate = new UserRepositoryJdbcTemplate(jdbcTemplate);
-        expectedUser = userRepositoryJdbcTemplate.save(user);
+
     }
 
     @Test
     void save() {
+        User expectedUser = userRepositoryJdbcTemplate.save(user);
         assertEquals(user, expectedUser);
+        userRepositoryJdbcTemplate.deleteById(expectedUser.getUserId());
     }
 
     @Test
     void deleteById() {
+        User expectedUser = userRepositoryJdbcTemplate.save(user);
         assertTrue(userRepositoryJdbcTemplate.deleteById(user.getUserId()));
-
     }
 
     @Test
     void update() {
-        User freddyMercury = new User(user.getUserId(), "Freddy Mercury", "123-5555");
-        userRepositoryJdbcTemplate.update(freddyMercury);
+        User saveUser = userRepositoryJdbcTemplate.save(user);
+        User updateUser = new User("Freddy Mercury", "123-5555");
+        userRepositoryJdbcTemplate.update(saveUser.getUserId(),updateUser);
 
-        Optional<User> found = userRepositoryJdbcTemplate.findById(freddyMercury.getUserId());
-        assertTrue(found.isPresent());
+        User foundUser = userRepositoryJdbcTemplate.findById(saveUser.getUserId());
 
-        User returnedUser = found.get();
-        assertEquals(freddyMercury, returnedUser);
+        assertEquals(updateUser.getPhoneNumber(), foundUser.getPhoneNumber());
+        assertEquals(updateUser.getName(), foundUser.getName());
+        userRepositoryJdbcTemplate.deleteById(saveUser.getUserId());
+
     }
 
     @Test
     void findById() {
-        Optional<User> found = userRepositoryJdbcTemplate.findById(user.getUserId());
-        assertTrue(found.isPresent());
+        User expectedUser = userRepositoryJdbcTemplate.save(user);
 
-        User returnedUser = found.get();
-        assertEquals(user, returnedUser);
+        User userFoundById = userRepositoryJdbcTemplate.findById(expectedUser.getUserId());
+
+        assertEquals(user.getName(), userFoundById.getName());
+        assertEquals(user.getPhoneNumber(), userFoundById.getPhoneNumber());
+
+        userRepositoryJdbcTemplate.deleteById(expectedUser.getUserId());
+
     }
 }
