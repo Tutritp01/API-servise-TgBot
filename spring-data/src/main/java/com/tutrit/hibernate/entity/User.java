@@ -19,7 +19,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class User {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = IDENTITY)
     private Long userId;
 
