@@ -30,6 +30,7 @@
         <module>rest-api-service</module>
         <module>liquibase</module>
         <module>jdbc-persistence</module>
+        <module>spring-data</module>
     </modules>
 
     <dependencies>
