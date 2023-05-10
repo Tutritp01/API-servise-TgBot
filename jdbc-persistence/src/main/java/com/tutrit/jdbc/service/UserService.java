@@ -2,13 +2,13 @@ package com.tutrit.jdbc.service;
 
 import com.tutrit.jdbc.entity.User;
 
-public interface DAOService {
+public interface UserService {
 
-    User saveUser(User user);
+    User save(User user);
 
     User findById(Long id);
 
-    void updateUser(User user);
+    void update(User user);
 
     void deleteById(Long id);
 }

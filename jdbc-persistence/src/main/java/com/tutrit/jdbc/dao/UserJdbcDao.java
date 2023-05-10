@@ -1,4 +1,4 @@
-package com.tutrit.jdbc.repository;
+package com.tutrit.jdbc.dao;
 
 
 import com.tutrit.jdbc.entity.User;
@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.Optional;
 
 @Component
-public class UserRepository implements UserDAO {
+public class UserJdbcDao implements UserDao {
     private final DataSource dataSource;
 
-    public UserRepository(DataSource dataSource) {
+    public UserJdbcDao(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -41,11 +42,11 @@ public class UserRepository implements UserDAO {
     }
 
     @Override
-    public User findById(Long id) {
+    public Optional<User> findById(Long id) {
         String query = """
                 SELECT name, phone_number 
                 FROM users 
-                WHERE id = ?
+                WHERE user_id = ?
                 """;
 
         try (Connection con = dataSource.getConnection();
@@ -54,13 +55,15 @@ public class UserRepository implements UserDAO {
             ps.setLong(1, id);
 
             ResultSet rs = ps.executeQuery();
-            User user = new User();
             if (rs.next()) {
+                User user = new User();
                 user.setUserId(id);
                 user.setName(rs.getString("name"));
                 user.setPhoneNumber(rs.getString("phone_number"));
+                return Optional.of(user);
+            } else {
+                return Optional.empty();
             }
-            return user;
         } catch (SQLException e) {
             throw new RuntimeException("Error finding user to database: " + e.getMessage(), e);
         }
@@ -70,7 +73,7 @@ public class UserRepository implements UserDAO {
         String query = """
                 UPDATE users 
                 SET name=?, phone_number=? 
-                WHERE id=?
+                WHERE user_id=?
                 """;
 
         try (Connection con = dataSource.getConnection();
@@ -87,17 +90,17 @@ public class UserRepository implements UserDAO {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public void deleteById(Long id) {
         String query = """
                 DELETE FROM users 
-                WHERE id = ?
+                WHERE user_id = ?
                 """;
 
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(query)
         ) {
             ps.setLong(1, id);
-            return ps.executeUpdate() > 0;
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user to database: " + e.getMessage(), e);
         }
