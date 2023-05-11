@@ -1,19 +1,22 @@
-package com.tutrit.jdbcTemplate.repository;
+package com.tutrit.jdbc.dao;
 
-import com.tutrit.jdbcTemplate.entity.User;
+import com.tutrit.jdbc.entity.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 import static java.util.Objects.requireNonNull;
 
-@Repository
-public class UserRepositoryJdbcTemplate implements UserJdbcTemplate {
+@Component
+public class UserJdbcTemplateDao implements UserDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public UserRepositoryJdbcTemplate(final JdbcTemplate jdbcTemplate) {
+    public UserJdbcTemplateDao(final JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -38,35 +41,33 @@ public class UserRepositoryJdbcTemplate implements UserJdbcTemplate {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public void deleteById(Long id) {
         String query = """
                 DELETE FROM users 
-                WHERE id = ?
+                WHERE user_id = ?
                 """;
-        return jdbcTemplate.update(query, id) > 0;
+        jdbcTemplate.update(query, id);
     }
 
     @Override
-    public boolean update(Long id, User user) {
+    public void update(User user, Long id) {
         String query = """
                 UPDATE users 
-                SET name=?, phone_number=? 
-                WHERE id=?
+                SET name = ?, phone_number = ?  
+                WHERE user_id=?
                 """;
-        return jdbcTemplate.update(query, user.getName(), user.getPhoneNumber(), id) > 0;
+        jdbcTemplate.update(query, user.getName(), user.getPhoneNumber(), id);
     }
 
     @Override
-    public User findById(Long id) {
+    public Optional<User> findById(Long id) {
         String query = """
                 SELECT * 
                 FROM users 
-                WHERE id = ?
+                WHERE user_id = ?
                 """;
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(User.class), id)
-                .stream()
-                .findAny()
-                .orElse(null);
+        List<User> users = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(User.class), id);
+        return users.stream().findAny();
     }
 
 }
