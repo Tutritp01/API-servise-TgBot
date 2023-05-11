@@ -1,12 +1,13 @@
-package com.tutrit.hibernate.dao;
+package com.tutrit.springdata.config;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.MySQLContainer;
-@TestPropertySource("classpath:hibernate-it.properties")
-public class IntegrationTestsForHibernate {
+
+public class EntityManagerIT {
     public static final MySQLContainer<?> container = new MySQLContainer<>("mysql:8.0.33");
 
     @DynamicPropertySource

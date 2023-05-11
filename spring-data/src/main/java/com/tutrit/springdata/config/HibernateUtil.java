@@ -1,4 +1,4 @@
-package com.tutrit.hibernate.config;
+package com.tutrit.springdata.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
 public class HibernateUtil  {
 
@@ -38,7 +38,6 @@ public class HibernateUtil  {
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql",env.getRequiredProperty("hibernate.format_sql"));
         properties.put("hibernate.hbm2ddl.auto",env.getRequiredProperty("hibernate.hbm2ddl.auto"));
-      //  properties.put("hibernate.current_session_context_class",env.getRequiredProperty("hibernate.current_session_context_class"));
         return properties;
     }
     @Bean
@@ -57,6 +56,5 @@ public class HibernateUtil  {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
-
 
 }
