@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  mysql-test:
+    image: mysql:8.0.32
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'sto'
+      MYSQL_ROOT_PASSWORD: '1234'
+    ports:
+      - '33060:3306'
+
+  adminer:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql-test
+    ports:
+      - "8080:8080"
