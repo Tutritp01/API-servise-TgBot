@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 @SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserJdbcServiceIT extends JdbcIT {
@@ -22,45 +20,42 @@ class UserJdbcServiceIT extends JdbcIT {
     private DataSource dataSource;
     @Autowired
     private UserJdbcService userJdbcService;
-//    @Autowired
-//    private UserJdbcDao userJdbcDao;
     private User expectedUser;
 
     private static final User user = new User("Jimi Hendrix", "555-12345");
 
     @BeforeEach
     void setUp() {
-      /*  userJdbcDao = new UserJdbcDao(dataSource);
-        userJdbcService = new UserJdbcService(userJdbcDao);*/
         expectedUser = userJdbcService.save(user);
     }
 
     @Test
     void testSave() {
-        assertEquals(user,expectedUser );
+        assertEquals(user, expectedUser);
     }
 
     @Test
     void testFindById() {
         User returnedUser = userJdbcService.findById(user.getUserId());
 
-        assertEquals(user,returnedUser );
+        assertEquals(user, returnedUser);
     }
 
     @Test
     void testUpdate() {
-        User freddyMercury = new User(user.getUserId(), "Freddy Mercury", "123-5555");
+        User updateUser = new User("Freddy Mercury", "123-5555");
 
-        userJdbcService.update(freddyMercury);
-
+        userJdbcService.update(updateUser, expectedUser.getUserId());
         User returnedUser = userJdbcService.findById(user.getUserId());
-        assertEquals(freddyMercury.getPhoneNumber(), returnedUser.getPhoneNumber());
+
+        assertEquals(updateUser.getPhoneNumber(), returnedUser.getPhoneNumber());
     }
 
     @Test
     void testDeleteById() {
         userJdbcService.deleteById(user.getUserId());
         User byId = userJdbcService.findById(user.getUserId());
-        assertEquals(byId,new User(null,null,null));
+
+        assertEquals(byId, new User(null, null, null));
     }
 }

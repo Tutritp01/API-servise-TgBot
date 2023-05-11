@@ -69,7 +69,7 @@ public class UserJdbcDao implements UserDao {
         }
     }
 
-    public void update(User user) {
+    public void update(User user, Long id) {
         String query = """
                 UPDATE users 
                 SET name=?, phone_number=? 
@@ -81,7 +81,7 @@ public class UserJdbcDao implements UserDao {
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getPhoneNumber());
-            ps.setLong(3, user.getUserId());
+            ps.setLong(3, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {

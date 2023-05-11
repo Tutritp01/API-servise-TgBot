@@ -16,19 +16,23 @@ public class UserJdbcService implements UserService {
     public UserJdbcService(final UserJdbcDao userJdbcDao) {
         this.userJdbcDao = userJdbcDao;
     }
+
     @Override
     public User save(User user) {
         return userJdbcDao.save(user);
     }
+
     @Override
     public User findById(Long id) {
         Optional<User> optionalUser = userJdbcDao.findById(id);
         return optionalUser.orElse(new User());
     }
+
     @Override
-    public void update(User user) {
-        userJdbcDao.update(user);
+    public void update(User user, Long id) {
+        userJdbcDao.update(user, id);
     }
+
     @Override
     public void deleteById(Long id) {
         userJdbcDao.deleteById(id);
