@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.tutrit")
 public class ApiServiceDistributive {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(ApiServiceDistributive.class, args);
 
     }
