@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CarClient {
+public final class CarClient {
     @Autowired(required = false)
     private CarPersistence carPersistence;
 
-    public Car save(Car engineer) {
+    public Car save(final Car engineer) {
         return carPersistence.save(engineer);
     }
 
-    public Car findById(String id) {
+    public Car findById(final String id) {
         return carPersistence.findById(id);
     }
 }

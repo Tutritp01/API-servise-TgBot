@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserClient {
+public final class UserClient {
 
     @Autowired(required = false)
-    UserPersistence userPersistence;
+    private UserPersistence userPersistence;
 
-    public User save(User user) {
+    public User save(final User user) {
         user.setName("Ignat");
         userPersistence.save(user);
         return user;
     }
 
-    public User findById(String id) {
+    public User findById(final String id) {
         return userPersistence.findById(id);
     }
 }

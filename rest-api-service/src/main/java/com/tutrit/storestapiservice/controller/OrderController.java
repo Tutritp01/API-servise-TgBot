@@ -15,7 +15,7 @@ import javax.management.InstanceNotFoundException;
 import java.util.List;
 
 @RestController
-public class OrderController {
+public final  class OrderController {
 
     private final OrderService orderService;
 
@@ -29,25 +29,30 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public Order findAll(@PathVariable String id) throws InstanceNotFoundException {
+    public Order findAll(final @PathVariable String id)
+            throws InstanceNotFoundException {
         return orderService.findById(id);
     }
 
     @PostMapping("/orders")
-    public Order saveNew(@RequestBody Order order) {
+    public Order saveNew(final @RequestBody Order order) {
         return orderService.save(order);
     }
 
     @PutMapping("/orders/{id}")
-    public Order update(@PathVariable String id, @RequestBody Order order) throws AccessException {
+    public Order update(
+            final @PathVariable String id,
+            final @RequestBody Order order) throws AccessException {
         if (!id.equals(order.getOrderId())) {
-            throw new AccessException("Order uri path doesn't match order id"); // TODO: 3/26/23 add custom exception
+            throw new AccessException("Order uri path doesn't match order id");
+            // TODO : add custom exception handling
+
         }
         return orderService.save(order);
     }
 
     @DeleteMapping("/orders/{id}")
-    public boolean deleteById(@PathVariable String id) {
+    public boolean deleteById(final @PathVariable String id) {
         return orderService.delete(id);
     }
 }
