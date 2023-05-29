@@ -3,9 +3,12 @@ package com.tutrit.storestapiservice.service;
 
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.storestapiservice.client.UserClient;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames = "users")
 public class UserService {
 
     private final UserClient userClient;
@@ -20,6 +23,7 @@ public class UserService {
         return user;
     }
 
+    @Cacheable
     public User findById(String id) {
         return userClient.findById(id);
     }
