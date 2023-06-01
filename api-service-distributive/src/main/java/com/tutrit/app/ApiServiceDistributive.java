@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class ApiServiceDistributive {
     public static void main(final String[] args) {
         SpringApplication.run(ApiServiceDistributive.class, args);
-
     }
 }
 

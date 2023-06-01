@@ -13,8 +13,7 @@
     <artifactId>persistence-core</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
-    <name>persistence.core</name>
-
+    <name>persistence-core</name>
 
     <dependencies>
         <dependency>
