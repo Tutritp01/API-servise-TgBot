@@ -7,14 +7,24 @@
         <groupId>com.tutrit</groupId>
         <artifactId>API-service-TgBot</artifactId>
         <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../../../API-servise-TgBot</relativePath>
     </parent>
 
     <artifactId>jdbc-persistence</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>com.tutrit</groupId>
+            <artifactId>persistence-core</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+            <version>8.0.32</version>
+        </dependency>
+
     </dependencies>
 </project>
