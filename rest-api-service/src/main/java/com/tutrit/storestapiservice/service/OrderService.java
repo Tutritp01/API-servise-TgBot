@@ -8,7 +8,7 @@ import javax.management.InstanceNotFoundException;
 import java.util.List;
 
 @Service
-public class OrderService {
+public final  class OrderService {
     private final OrderClient orderClient;
 
     public OrderService(final OrderClient orderClient) {
@@ -19,15 +19,15 @@ public class OrderService {
         return orderClient.findAll();
     }
 
-    public Order findById(String id) throws InstanceNotFoundException {
+    public Order findById(final String id) throws InstanceNotFoundException {
         return orderClient.findById(id);
     }
 
-    public Order save(Order order) {
+    public Order save(final Order order) {
         return orderClient.save(order);
     }
 
-    public boolean delete(String orderId) {
+    public boolean delete(final String orderId) {
         return orderClient.delete(orderId);
     }
 }

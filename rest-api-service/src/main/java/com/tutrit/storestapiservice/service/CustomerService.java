@@ -6,20 +6,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 
-public class CustomerService {
+public final class CustomerService {
     private final CustomerClient customerClient;
 
     public CustomerService(final CustomerClient customerClient) {
         this.customerClient = customerClient;
     }
 
-    public Customer save(Customer customer) {
+    public Customer save(final Customer customer) {
         customer.setCity("minsk");
         customerClient.save(customer);
         return customer;
     }
 
-    public Customer findById(String id) {
+    public Customer findById(final String id) {
         return customerClient.findById(id);
     }
 }

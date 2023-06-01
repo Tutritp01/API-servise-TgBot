@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomerClient {
+public final class CustomerClient {
     @Autowired(required = false)
     private CustomerPersistence customerPersistence;
 
-    public Customer save(Customer customer) {
+    public Customer save(final Customer customer) {
         customer.setName("Yanki");
         customerPersistence.save(customer);
         return customer;
     }
 
-    public Customer findById(String id) {
+    public Customer findById(final String id) {
         return customerPersistence.findById(id);
 
     }

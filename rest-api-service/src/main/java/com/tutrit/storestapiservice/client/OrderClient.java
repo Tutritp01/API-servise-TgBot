@@ -9,7 +9,7 @@ import javax.management.InstanceNotFoundException;
 import java.util.List;
 
 @Component
-public class OrderClient {
+public final class OrderClient {
 
     @Autowired(required = false)
     private OrderPersistence orderPersistence;
@@ -18,16 +18,16 @@ public class OrderClient {
         return orderPersistence.findAll();
     }
 
-    public Order findById(String id) throws InstanceNotFoundException {
+    public Order findById(final String id) throws InstanceNotFoundException {
         return orderPersistence.findById(id)
                 .orElseThrow(InstanceNotFoundException::new);
     }
 
-    public Order save(Order order) {
+    public Order save(final Order order) {
         return orderPersistence.save(order);
     }
 
-    public boolean delete(String orderId) {
+    public boolean delete(final String orderId) {
         return orderPersistence.delete(orderId);
     }
 }
