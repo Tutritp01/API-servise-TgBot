@@ -18,18 +18,19 @@
         <checkstyle.puppycrawl.version>10.7.0</checkstyle.puppycrawl.version>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
-        <org.springframework.version>3.0.2</org.springframework.version>
+        <spring-boot.version>3.0.2</spring-boot.version>
         <org.progecklobmok.version>1.18.24</org.progecklobmok.version>
     </properties>
 
     <modules>
         <module>util</module>
-        <module>persistence-core</module>
-        <module>in-memory-repository</module>
         <module>api-service-distributive</module>
         <module>rest-api-service</module>
-        <module>liquibase</module>
-        <module>jdbc-persistence</module>
+        <module>persistence</module>
+        <module>persistence/in-memory-repository</module>
+        <module>persistence/jdbc-persistence</module>
+        <module>persistence/liquibase</module>
+
     </modules>
 
     <dependencies>
@@ -61,7 +62,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
