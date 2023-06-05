@@ -9,17 +9,17 @@ import java.sql.DriverManager;
 @Configuration
 public class ConnectionProvider {
     @Value("${datasource.uri}")
-    private String uri = "jdbc:mysql://localhost:3306/sto";
+    private String uri;
     @Value("${datasource.username}")
-    private String username = "root";
+    private String username;
     @Value("${datasource.password}")
-    private String password = "1234";
+    private String password;
 
     public Connection getConnection() {
         try{
             return DriverManager.getConnection(uri, username, password);
         } catch (Exception ex) {
-            return null;
+            throw new RuntimeException("Error creating connection ");
         }
     }
 
