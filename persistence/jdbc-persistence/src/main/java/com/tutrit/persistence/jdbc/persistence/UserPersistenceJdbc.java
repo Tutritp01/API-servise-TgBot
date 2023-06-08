@@ -4,9 +4,11 @@ import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.exceptions.NotImplementedException;
 import com.tutrit.persistence.core.persistence.UserPersistence;
 import com.tutrit.persistence.jdbc.config.ConnectionProvider;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 
+@Component
 public class UserPersistenceJdbc implements UserPersistence {
 
     @Override

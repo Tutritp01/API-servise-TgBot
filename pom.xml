@@ -27,6 +27,7 @@
         <module>api-service-distributive</module>
         <module>rest-api-service</module>
         <module>persistence</module>
+        <module>persistence/persistence-core</module>
         <module>persistence/in-memory-repository</module>
         <module>persistence/jdbc-persistence</module>
         <module>persistence/liquibase</module>

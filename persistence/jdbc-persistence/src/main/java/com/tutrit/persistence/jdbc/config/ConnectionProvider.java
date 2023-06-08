@@ -8,11 +8,11 @@ import java.sql.DriverManager;
 
 @Configuration
 public class ConnectionProvider {
-    @Value("${datasource.uri}")
+    @Value("${datasource.uri:jdbc:mysql://localhost:3306/sto}")
     private String uri = "jdbc:mysql://localhost:3306/sto";
-    @Value("${datasource.username}")
+    @Value("${datasource.username:root}")
     private String username = "root";
-    @Value("${datasource.password}")
+    @Value("${datasource.password:1234}")
     private String password = "1234";
 
     public Connection getConnection() {
