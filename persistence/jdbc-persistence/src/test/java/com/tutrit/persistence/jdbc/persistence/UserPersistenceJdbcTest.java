@@ -1,27 +1,25 @@
 package com.tutrit.persistence.jdbc.persistence;
 
 import com.tutrit.persistence.core.bean.User;
-import com.tutrit.persistence.jdbc.config.ConnectionProvider;
+import com.tutrit.persistence.jdbc.config.SpringContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserPersistenceJdbcTest {
     @Autowired
     private UserPersistenceJdbc userPersistenceJdbc;
     private User saveUser;
     private User user ;
 
-    public User createUser() {
+    public void createUser() {
         String id = UUID.randomUUID().toString();
         user = new User(id, "Jimi Hendrix", "5554-12345");
-        return user;
     }
 
     @BeforeEach
