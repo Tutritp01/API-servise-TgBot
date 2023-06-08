@@ -1,5 +1,6 @@
 package com.tutrit.persistence.jdbc.config;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +23,4 @@ public class ConnectionProvider {
             return null;
         }
     }
-
 }
