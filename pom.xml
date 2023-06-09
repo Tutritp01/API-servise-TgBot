@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tutrit</groupId>
-    <artifactId>API-service-TgBot</artifactId>
+    <artifactId>sto-rest-api</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -27,6 +27,7 @@
         <module>api-service-distributive</module>
         <module>rest-api-service</module>
         <module>persistence</module>
+        <module>persistence/persistence-core</module>
         <module>persistence/in-memory-repository</module>
         <module>persistence/jdbc-persistence</module>
         <module>persistence/liquibase</module>
