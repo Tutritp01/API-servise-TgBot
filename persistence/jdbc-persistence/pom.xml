@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.tutrit</groupId>
-        <artifactId>API-service-TgBot</artifactId>
+        <artifactId>sto-rest-api</artifactId>
         <version>0.1.0-SNAPSHOT</version>
-        <relativePath>../../../API-servise-TgBot</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>jdbc-persistence</artifactId>
@@ -25,6 +25,5 @@
             <scope>runtime</scope>
             <version>8.0.32</version>
         </dependency>
-
     </dependencies>
 </project>

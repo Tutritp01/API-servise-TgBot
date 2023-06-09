@@ -1,6 +1,7 @@
 package com.tutrit.persistence.jdbc.persistence;
 
 import com.tutrit.persistence.core.bean.User;
+import com.tutrit.persistence.core.exceptions.NotImplementedException;
 import com.tutrit.persistence.core.persistence.UserPersistence;
 import com.tutrit.persistence.jdbc.config.ConnectionProvider;
 import org.springframework.stereotype.Component;
