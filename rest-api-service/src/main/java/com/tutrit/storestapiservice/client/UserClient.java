@@ -12,7 +12,6 @@ public final class UserClient {
     private UserPersistence userPersistence;
 
     public User save(final User user) {
-        user.setName("Ignat");
         userPersistence.save(user);
         return user;
     }

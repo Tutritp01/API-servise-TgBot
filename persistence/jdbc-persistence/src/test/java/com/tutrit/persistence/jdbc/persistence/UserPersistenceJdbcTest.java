@@ -1,6 +1,7 @@
 package com.tutrit.persistence.jdbc.persistence;
 
 import com.tutrit.persistence.core.bean.User;
+import com.tutrit.persistence.core.persistence.UserPersistence;
 import com.tutrit.persistence.jdbc.config.SpringContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

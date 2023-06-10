@@ -15,7 +15,6 @@ public final  class UserService {
     }
 
     public User save(final User user) {
-        user.setPhoneNumber("+375121212121");
         userClient.save(user);
         return user;
     }
