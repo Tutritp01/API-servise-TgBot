@@ -8,11 +8,14 @@ import java.util.Arrays;
 import java.util.UUID;
 
 @Component
-public class InMemoryEngineerPersistence implements EngineerPersistence {
-    public static Engineer[] engineers = new Engineer[15];
+public final class InMemoryEngineerPersistence implements EngineerPersistence {
+    private static final int MAX_ENGINEERS = 15;
+    private static final int ADDITIONAL_ENGINEERS = 5;
+    private static Engineer[] engineers = new Engineer[MAX_ENGINEERS];
+
 
     @Override
-    public Engineer save(Engineer engineer) {
+    public Engineer save(final Engineer engineer) {
         int returnIndex = 0;
         for (int i = 0; i < engineers.length; i++) {
             if (engineers[i] == null) {
@@ -20,7 +23,8 @@ public class InMemoryEngineerPersistence implements EngineerPersistence {
                 returnIndex = i;
                 engineers[i] = engineer;
                 if ((i * 2) >= engineers.length) {
-                    engineers = Arrays.copyOf(engineers, engineers.length + 5);
+                    engineers = Arrays.copyOf(engineers,
+                            engineers.length + ADDITIONAL_ENGINEERS);
                 }
                 break;
             }
@@ -29,9 +33,10 @@ public class InMemoryEngineerPersistence implements EngineerPersistence {
     }
 
     @Override
-    public Engineer findById(String id) {
+    public Engineer findById(final String id) {
         for (Engineer engineerRepository : engineers) {
-            if (engineerRepository != null && engineerRepository.getEngineerId().equals(id)) {
+            if (engineerRepository != null
+                    && engineerRepository.getEngineerId().equals(id)) {
                 return engineerRepository;
             }
         }
