@@ -1,4 +1,4 @@
-package com.tutrit.persistence.jdbc.config;
+package com.tutrit.persistence.jdbc.template.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ public class ConnectionProviderJdbcTemplate {
     private String username;
     @Value("${datasource.password}")
     private String password;
-    @Value("${datasource.driver}")
+    @Value("${datasource.driver-class-name}")
     private String driver;
 
     @Bean

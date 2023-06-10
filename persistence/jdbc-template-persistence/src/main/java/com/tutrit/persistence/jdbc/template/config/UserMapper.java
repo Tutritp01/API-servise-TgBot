@@ -1,4 +1,4 @@
-package com.tutrit.persistence.jdbc.config;
+package com.tutrit.persistence.jdbc.template.config;
 
 import com.tutrit.persistence.core.bean.User;
 import org.springframework.jdbc.core.RowMapper;

@@ -31,6 +31,7 @@
         <module>persistence/in-memory-repository</module>
         <module>persistence/jdbc-persistence</module>
         <module>persistence/liquibase</module>
+        <module>persistence/jdbc-template-persistence</module>
 
     </modules>
 

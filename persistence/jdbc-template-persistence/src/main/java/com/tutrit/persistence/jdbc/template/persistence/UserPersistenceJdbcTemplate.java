@@ -1,4 +1,4 @@
-package com.tutrit.persistence.jdbc.persistence;
+package com.tutrit.persistence.jdbc.template.persistence;
 
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.persistence.UserPersistence;

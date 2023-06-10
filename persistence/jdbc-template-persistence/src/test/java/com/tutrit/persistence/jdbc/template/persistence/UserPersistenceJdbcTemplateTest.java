@@ -1,6 +1,7 @@
-package com.tutrit.persistence.jdbc.persistence;
+package com.tutrit.persistence.jdbc.template.persistence;
 
 import com.tutrit.persistence.core.bean.User;
+import com.tutrit.persistence.jdbc.template.config.SpringContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserPersistenceJdbcTemplateTest {
 
     @Autowired
