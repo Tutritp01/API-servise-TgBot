@@ -24,8 +24,7 @@ public class UserClient {
      * @return The saved user.
      */
     public User save(final User user) {
-        userPersistence.save(user);
-        return user;
+        return userPersistence.save(user);
     }
 
     /**

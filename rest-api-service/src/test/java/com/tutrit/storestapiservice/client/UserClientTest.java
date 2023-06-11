@@ -20,7 +20,7 @@ class UserClientTest {
 
     @Test
     void save() {
-        when(userPersistence.save(changeUser())).thenReturn(expectedUser());
+        when(userPersistence.save(createNewUser())).thenReturn(expectedUser());
         var actualUser = userClient.save(createNewUser());
         assertEquals(expectedUser(), actualUser);
     }
@@ -35,14 +35,6 @@ class UserClientTest {
     private User createNewUser() {
         var user = new User();
         user.setUserId("1");
-        user.setName("Bob");
-        user.setPhoneNumber("+375121212121");
-        return user;
-    }
-
-    private User changeUser() {
-        var user = new User();
-        user.setName("Ignat");
         return user;
     }
 
