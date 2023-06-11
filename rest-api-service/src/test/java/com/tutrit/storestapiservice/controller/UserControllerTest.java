@@ -36,8 +36,6 @@ class UserControllerTest {
     private User createNewUser() {
         var user = new User();
         user.setUserId("1");
-        user.setName("Ignat");
-        user.setPhoneNumber("+1");
         return user;
     }
 

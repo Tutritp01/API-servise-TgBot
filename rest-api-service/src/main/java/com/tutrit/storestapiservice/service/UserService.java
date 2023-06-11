@@ -20,9 +20,7 @@ public class UserService {
      * @return The saved user.
      */
     public User save(final User user) {
-        user.setPhoneNumber("+375121212121");
-        userClient.save(user);
-        return user;
+        return userClient.save(user);
     }
 
     /**

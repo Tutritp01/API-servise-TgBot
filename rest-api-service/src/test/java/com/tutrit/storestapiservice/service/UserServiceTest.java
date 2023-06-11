@@ -23,7 +23,7 @@ class UserServiceTest {
     @Test
     void save() {
         var user = createNewUser();
-        when(userClient.save(changeUser())).thenReturn(expectedUser());
+        when(userClient.save(createNewUser())).thenReturn(expectedUser());
         User actualUser = userService.save(user);
         assertEquals(expectedUser(), actualUser);
     }
@@ -38,14 +38,6 @@ class UserServiceTest {
     private User createNewUser() {
         var user = new User();
         user.setUserId("1");
-        user.setName("Ignat");
-        user.setPhoneNumber("+1");
-        return user;
-    }
-
-    private User changeUser() {
-        var user = new User();
-        user.setName("Ignat");
         return user;
     }
 
