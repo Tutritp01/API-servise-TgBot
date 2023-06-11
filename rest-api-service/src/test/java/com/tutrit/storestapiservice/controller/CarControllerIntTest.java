@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tutrit.persistence.core.bean.Car;
 import com.tutrit.persistence.core.persistence.CarPersistence;
 import com.tutrit.storestapiservice.client.CarClient;
+import com.tutrit.storestapiservice.configurations.SpringContext;
 import com.tutrit.storestapiservice.service.CarService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 @AutoConfigureMockMvc
 class CarControllerIntTest {
 
