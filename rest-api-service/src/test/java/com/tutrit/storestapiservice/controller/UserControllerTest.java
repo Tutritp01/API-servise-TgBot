@@ -1,7 +1,8 @@
-package com.tutrit.storestapiservice.service;
+package com.tutrit.storestapiservice.controller;
 
 import com.tutrit.persistence.core.bean.User;
-import com.tutrit.storestapiservice.client.UserClient;
+import com.tutrit.storestapiservice.configurations.SpringContext;
+import com.tutrit.storestapiservice.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,27 +11,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-class UserServiceTest {
-
-    @Autowired
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
+class UserControllerTest {
+@Autowired
+    UserController userController;
+@MockBean
     UserService userService;
 
-    @MockBean
-    UserClient userClient;
 
     @Test
-    void save() {
-        var user = createNewUser();
-        when(userClient.save(changeUser())).thenReturn(expectedUser());
-        User actualUser = userService.save(user);
+    void getById() {
+        when(userService.findById("1")).thenReturn(expectedUser());
+        User actualUser = userController.getById("1");
         assertEquals(expectedUser(), actualUser);
     }
 
     @Test
-    void findById() {
-        when(userClient.findById("1")).thenReturn(expectedUser());
-        var actualUser = userService.findById("1");
+    void post() {
+        when(userService.save(createNewUser())).thenReturn(expectedUser());
+        User actualUser = userController.post(createNewUser());
         assertEquals(expectedUser(), actualUser);
     }
 
@@ -42,11 +41,6 @@ class UserServiceTest {
         return user;
     }
 
-    private User changeUser() {
-        var user = new User();
-        user.setName("Ignat");
-        return user;
-    }
 
     private User expectedUser() {
         var user = new User();

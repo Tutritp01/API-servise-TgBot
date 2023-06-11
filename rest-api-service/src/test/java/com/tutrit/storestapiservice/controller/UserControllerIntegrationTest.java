@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.persistence.UserPersistence;
 import com.tutrit.storestapiservice.client.UserClient;
+import com.tutrit.storestapiservice.configurations.SpringContext;
 import com.tutrit.storestapiservice.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 @AutoConfigureMockMvc
 class UserControllerIntegrationTest {
         @Autowired
