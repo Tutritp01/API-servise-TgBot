@@ -20,8 +20,7 @@ public class UserService {
      * @return The saved user.
      */
     public User save(final User user) {
-        userClient.save(user);
-        return user;
+        return userClient.save(user);
     }
 
     /**
