@@ -10,12 +10,12 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class InMemoryCustomerPersistence implements CustomerPersistence {
-    private final static HashSet<Customer> customers = new HashSet<>();
+public final class InMemoryCustomerPersistence implements CustomerPersistence {
+    private final HashSet<Customer> customers = new HashSet<>();
 
 
     @Override
-    public Customer save(Customer customer) {
+    public Customer save(final Customer customer) {
         if (!customers.contains(customer)) {
             customer.setCustomerId(UUID.randomUUID().toString());
             customers.add(customer);
@@ -27,7 +27,7 @@ public class InMemoryCustomerPersistence implements CustomerPersistence {
     }
 
     @Override
-    public Customer findById(String id) {
+    public Customer findById(final String id) {
         for (final Customer customer : customers) {
             if (customer.getCustomerId().equals(id)) {
                 return customer;

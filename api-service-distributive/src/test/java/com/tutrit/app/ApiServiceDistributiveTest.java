@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = ApiServiceDistributive.class)
-public class ApiServiceDistributiveTest {
+class ApiServiceDistributiveTest {
 
     @Autowired
     ApplicationContext ctx;

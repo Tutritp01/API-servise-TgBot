@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-public final  class UserController {
+public class UserController {
 
     private final UserService userService;
 
@@ -17,14 +17,25 @@ public final  class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Retrieves a user by ID.
+     *
+     * @param id The ID of the user to retrieve.
+     * @return The user with the specified ID.
+     */
     @GetMapping("/users/{id}")
     public User getById(final @PathVariable String id) {
         return userService.findById(id);
     }
 
+    /**
+     * Saves a new user.
+     *
+     * @param user The user to be saved.
+     * @return The saved user.
+     */
     @PostMapping("/users")
     public User post(final @RequestBody User user) {
         return userService.save(user);
     }
 }
-

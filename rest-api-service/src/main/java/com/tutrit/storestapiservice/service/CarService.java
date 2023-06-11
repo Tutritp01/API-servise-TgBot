@@ -5,7 +5,7 @@ import com.tutrit.storestapiservice.client.CarClient;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class CarService {
+public class CarService {
 
     private final CarClient carClient;
 
@@ -13,6 +13,12 @@ public final class CarService {
         this.carClient = carClient;
     }
 
+    /**
+     * Saves a car.
+     *
+     * @param car The car to be saved.
+     * @return The saved car.
+     */
     public Car save(final Car car) {
         if (car.getCarId().equals("1")) {
             car.setCarId("2");
@@ -20,6 +26,12 @@ public final class CarService {
         return carClient.save(car);
     }
 
+    /**
+     * Retrieves a car by ID.
+     *
+     * @param id The ID of the car to retrieve.
+     * @return The car with the specified ID.
+     */
     public Car findById(final String id) {
         return carClient.findById(id);
     }

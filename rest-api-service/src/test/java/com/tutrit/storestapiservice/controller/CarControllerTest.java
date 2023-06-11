@@ -1,6 +1,7 @@
 package com.tutrit.storestapiservice.controller;
 
 import com.tutrit.persistence.core.bean.Car;
+import com.tutrit.storestapiservice.configurations.SpringContext;
 import com.tutrit.storestapiservice.service.CarService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 class CarControllerTest {
 
     @Autowired

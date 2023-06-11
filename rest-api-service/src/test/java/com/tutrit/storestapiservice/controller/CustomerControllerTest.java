@@ -1,7 +1,8 @@
-package com.tutrit.storestapiservice.service;
+package com.tutrit.storestapiservice.controller;
 
 import com.tutrit.persistence.core.bean.Customer;
-import com.tutrit.storestapiservice.client.CustomerClient;
+import com.tutrit.storestapiservice.configurations.SpringContext;
+import com.tutrit.storestapiservice.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,28 +11,28 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-class CustomerServiceTest {
-
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
+class CustomerControllerTest {
     @Autowired
-    CustomerService customerService;
+    CustomerController customerController;
 
     @MockBean
-    CustomerClient customerClient;
+    CustomerService customerService;
+
 
     @Test
-    void save() {
-        Customer customer = createNewCustomer();
-        when(customerClient.save(changeCustomerBeforeSave())).thenReturn(expectedCustomer());
-        Customer actualCustomer = customerService.save(customer);
+    void getById() {
+        when(customerService.findById("1")).thenReturn(expectedCustomer());
+        Customer actualCustomer = customerController.getById("1");
         assertEquals(expectedCustomer(), actualCustomer);
     }
 
     @Test
-    void findById() {
-        when(customerClient.findById("1")).thenReturn(expectedCustomer());
-        var actualCustomer = customerService.findById("1");
+    void post() {
+        when(customerService.save(createNewCustomer())).thenReturn(expectedCustomer());
+        Customer actualCustomer = customerController.post(createNewCustomer());
         assertEquals(expectedCustomer(), actualCustomer);
+
     }
 
     private Customer createNewCustomer() {
@@ -44,11 +45,6 @@ class CustomerServiceTest {
         return customer;
     }
 
-    private Customer changeCustomerBeforeSave() {
-        var customer = new Customer();
-        customer.setCity("minsk");
-        return customer;
-    }
 
     private Customer expectedCustomer() {
         var customer = new Customer();
