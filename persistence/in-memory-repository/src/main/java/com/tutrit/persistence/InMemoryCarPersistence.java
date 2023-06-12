@@ -11,25 +11,25 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class InMemoryCarPersistence implements CarPersistence {
-    private static final List<Car> cars = new ArrayList<>();
+public final class InMemoryCarPersistence implements CarPersistence {
+    private static final List<Car> CARS = new ArrayList<>();
 
 
     @Override
-    public Car save(Car car) {
+    public Car save(final Car car) {
         car.setCarId(UUID.randomUUID().toString());
-        cars.add(car);
+        CARS.add(car);
         return car;
     }
 
     @Override
-    public Car findById(String id) {
+    public Car findById(final String id) {
         Car car = null;
         try {
             if (!isContains(id)) {
                 throw new RuntimeException("Car not found!");
             }
-            for (Car value : cars) {
+            for (Car value : CARS) {
                 if (id.equals(value.getCarId())) {
                     car = value;
                 }
@@ -40,9 +40,9 @@ public class InMemoryCarPersistence implements CarPersistence {
         return car;
     }
 
-    public boolean isContains(String id) {
+    public boolean isContains(final String id) {
         Car car = null;
-        for (Car value : cars) {
+        for (Car value : CARS) {
             if (id.equals(value.getCarId())) {
                 car = value;
             }

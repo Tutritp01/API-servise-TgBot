@@ -11,18 +11,18 @@ import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class InMemoryUserPersistence implements UserPersistence {
+public final class InMemoryUserPersistence implements UserPersistence {
     private final Map<String, User> userMap = new HashMap<>();
 
     @Override
-    public User save(User user) {
+    public User save(final User user) {
         user.setUserId(UUID.randomUUID().toString());
         userMap.put(user.getUserId(), user);
         return user;
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(final String id) {
         return userMap.get(id);
     }
 
@@ -32,7 +32,7 @@ public class InMemoryUserPersistence implements UserPersistence {
     }
 
     @Override
-    public boolean deleteById(String userId) {
+    public boolean deleteById(final String userId) {
         throw new NotImplementedException();
     }
 }

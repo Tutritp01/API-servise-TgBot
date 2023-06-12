@@ -13,14 +13,14 @@ import java.util.List;
 public class UserPersistenceJdbc implements UserPersistence {
 
     @Override
-    public User save(User user) {
+    public User save(final User user) {
         Connection con = new ConnectionProvider().getConnection();
         String query = "";
         throw new NotImplementedException();
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(final String id) {
         throw new NotImplementedException();
     }
 
@@ -30,7 +30,7 @@ public class UserPersistenceJdbc implements UserPersistence {
     }
 
     @Override
-    public boolean deleteById(String userId) {
+    public boolean deleteById(final String userId) {
         throw new NotImplementedException();
     }
 }
