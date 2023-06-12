@@ -31,7 +31,7 @@ public class UserPersistenceJdbc implements UserPersistence {
      */
     @Override
     public User save(final User user) {
-        final String sql = """
+        String sql = """
                 INSERT INTO user (user_id, name, phone_number)
                 VALUES (?, ?, ?)""";
         user.setUserId(UUID.randomUUID().toString());
@@ -53,14 +53,13 @@ public class UserPersistenceJdbc implements UserPersistence {
      * Retrieves a user from the database based on the provided ID.
      *
      * @param id the ID of the user to retrieve
-     * @return the user with the specified ID, or an empty user if
-     * not found
-     * @throws RuntimeException if there is an error fetching the
-     * user from the database
+     * @return the user with the specified ID, or an empty user if not found
+     * @throws RuntimeException if there is an error fetching the user from the
+     * database
      */
     @Override
     public User findById(final String id) {
-        final String sql = "SELECT * FROM user WHERE user_id = ?";
+        String sql = "SELECT * FROM user WHERE user_id = ?";
         try (Connection connection = connectionProvider.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)
         ) {
@@ -89,10 +88,9 @@ public class UserPersistenceJdbc implements UserPersistence {
      * in the database
      */
     public void update(final User user, final String id) {
-        final String sql = """
+        String sql = """
                 UPDATE user SET name = ?, phone_number = ?
                 WHERE user_id = ?""";
-
         try (Connection con = connectionProvider.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)
         ) {
@@ -106,6 +104,7 @@ public class UserPersistenceJdbc implements UserPersistence {
                     + e.getMessage(), e);
         }
     }
+
     /**
      * Deletes a user from the database based on the specified ID.
      * @param id the ID of the user to delete
