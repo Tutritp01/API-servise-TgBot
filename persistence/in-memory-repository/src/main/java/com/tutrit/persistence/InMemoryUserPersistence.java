@@ -32,7 +32,7 @@ public class InMemoryUserPersistence implements UserPersistence {
     }
 
     @Override
-    public boolean deleteById(String userId) {
+    public boolean deleteById(final String userId) {
         throw new NotImplementedException();
     }
 }

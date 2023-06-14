@@ -25,7 +25,7 @@ public class UserPersistenceJdbc implements UserPersistence {
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(final String id) {
         throw new NotImplementedException();
     }
 

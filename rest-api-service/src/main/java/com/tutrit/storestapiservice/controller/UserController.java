@@ -1,5 +1,6 @@
 package com.tutrit.storestapiservice.controller;
 
+
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.storestapiservice.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,4 +86,3 @@ public class UserController {
         return userService.deleteById(userId);
     }
 }
-
