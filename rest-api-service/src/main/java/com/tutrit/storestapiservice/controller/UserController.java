@@ -1,6 +1,5 @@
 package com.tutrit.storestapiservice.controller;
 
-
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.storestapiservice.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +17,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+
     private final UserService userService;
 
     public UserController(final UserService userService) {
