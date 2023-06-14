@@ -6,20 +6,21 @@ import com.tutrit.persistence.core.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InMemoryCustomerService implements CustomerService {
+public final class InMemoryCustomerService implements CustomerService {
     private final InMemoryCustomerPersistence inMemoryCustomerPersistence;
 
-    public InMemoryCustomerService(InMemoryCustomerPersistence inMemoryCustomerPersistence) {
+    public InMemoryCustomerService(
+            final InMemoryCustomerPersistence inMemoryCustomerPersistence) {
         this.inMemoryCustomerPersistence = inMemoryCustomerPersistence;
     }
 
     @Override
-    public Customer saveCustomer(Customer customer) {
+    public Customer saveCustomer(final Customer customer) {
         return inMemoryCustomerPersistence.save(customer);
     }
 
     @Override
-    public Customer getCustomer(String id) {
+    public Customer getCustomer(final String id) {
         return inMemoryCustomerPersistence.findById(id);
     }
 }

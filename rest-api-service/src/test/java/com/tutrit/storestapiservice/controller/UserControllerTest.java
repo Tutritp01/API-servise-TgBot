@@ -1,6 +1,7 @@
 package com.tutrit.storestapiservice.controller;
 
 import com.tutrit.persistence.core.bean.User;
+import com.tutrit.storestapiservice.configurations.SpringContext;
 import com.tutrit.storestapiservice.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserControllerTest {
 @Autowired
     UserController userController;
@@ -35,8 +36,6 @@ class UserControllerTest {
     private User createNewUser() {
         var user = new User();
         user.setUserId("1");
-        user.setName("Ignat");
-        user.setPhoneNumber("+1");
         return user;
     }
 

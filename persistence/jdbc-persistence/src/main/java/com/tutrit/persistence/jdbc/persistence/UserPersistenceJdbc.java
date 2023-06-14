@@ -7,19 +7,24 @@ import com.tutrit.persistence.jdbc.config.ConnectionProvider;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 @Component
-public class UserPersistenceJdbc implements UserPersistence {
+public final class UserPersistenceJdbc implements UserPersistence {
 
     @Override
-    public User save(User user) {
-        Connection con = new ConnectionProvider().getConnection();
+    public User save(final User user)  {
+        try {
+            Connection con = new ConnectionProvider().getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         String query = "";
         throw new NotImplementedException();
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(final String id) {
         throw new NotImplementedException();
     }
 }

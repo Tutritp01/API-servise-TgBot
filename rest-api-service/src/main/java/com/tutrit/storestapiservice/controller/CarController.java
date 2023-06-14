@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
-public final class CarController {
+public class CarController {
 
     private final CarService carService;
 
@@ -18,11 +17,23 @@ public final class CarController {
         this.carService = carService;
     }
 
+    /**
+     * Retrieves a car by its ID.
+     *
+     * @param id The ID of the car to retrieve.
+     * @return The car with the specified ID.
+     */
     @GetMapping("/cars/{id}")
     public Car getById(final @PathVariable String id) {
         return carService.findById(id);
     }
 
+    /**
+     * Saves a new car.
+     *
+     * @param car The car to be saved.
+     * @return The saved car.
+     */
     @PostMapping("/cars")
     public Car post(final @RequestBody Car car) {
         return carService.save(car);

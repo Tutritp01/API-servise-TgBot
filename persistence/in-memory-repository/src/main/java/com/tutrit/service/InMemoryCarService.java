@@ -6,20 +6,21 @@ import com.tutrit.persistence.core.service.CarService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InMemoryCarService implements CarService {
+public final class InMemoryCarService implements CarService {
     private final InMemoryCarPersistence inMemoryCarPersistence;
 
-    public InMemoryCarService(InMemoryCarPersistence inMemoryCarPersistence) {
+    public InMemoryCarService(
+            final InMemoryCarPersistence inMemoryCarPersistence) {
         this.inMemoryCarPersistence = inMemoryCarPersistence;
     }
 
     @Override
-    public Car saveCar(Car car) {
+    public Car saveCar(final Car car) {
         return inMemoryCarPersistence.save(car);
     }
 
     @Override
-    public Car getCar(String id) {
+    public Car getCar(final String id) {
         return inMemoryCarPersistence.findById(id);
     }
 }
