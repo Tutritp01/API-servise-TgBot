@@ -7,7 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-
+/**
+ * Provides configuration for JDBC template and
+ * data source used for database connectivity.
+ * This class is designed for extension and customization.
+ */
 @Configuration
 public class ConnectionProviderJdbcTemplate {
     @Value("${datasource.uri}")
@@ -19,6 +23,11 @@ public class ConnectionProviderJdbcTemplate {
     @Value("${datasource.driver-class-name}")
     private String driver;
 
+    /**
+     * Configures and provides the data source for database connectivity.
+     *
+     * @return the configured data source
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource driverManager = new DriverManagerDataSource();
@@ -28,7 +37,14 @@ public class ConnectionProviderJdbcTemplate {
         driverManager.setDriverClassName(driver);
         return driverManager;
     }
-
+    /**
+     * Configures and provides a customized JdbcTemplate
+     * instance for database operations.
+     * This method can be safely overridden in a subclass
+     * to customize the JdbcTemplate behavior.
+     *
+     * @return the configured JdbcTemplate instance
+     */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
