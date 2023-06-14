@@ -34,7 +34,7 @@ public class UserPersistenceJdbcTemplate implements UserPersistence {
     public User save(final User user) {
         user.setUserId(UUID.randomUUID().toString());
         String sql = """
-                INSERT INTO user (user_id,name, phone_number)
+                INSERT INTO `users` (user_id,name, phone_number)
                 VALUES (?, ?, ?)""";
         jdbcTemplate.update(
                 sql, user.getUserId(), user.getName(), user.getPhoneNumber());
@@ -52,7 +52,7 @@ public class UserPersistenceJdbcTemplate implements UserPersistence {
      */
     @Override
     public User findById(final String id) {
-        String sql = "SELECT * FROM user WHERE user_id = ?";
+        String sql = "SELECT * FROM `users` WHERE user_id = ?";
         try {
             return jdbcTemplate.queryForObject(
                     sql, new BeanPropertyRowMapper<>(User.class), id);
@@ -70,7 +70,7 @@ public class UserPersistenceJdbcTemplate implements UserPersistence {
      * @param id the ID of the user to delete
      */
     public void deleteById(final String id) {
-        String sql = "DELETE FROM user WHERE user_id = ?";
+        String sql = "DELETE FROM `users` WHERE user_id = ?";
         jdbcTemplate.update(sql, id);
     }
 
@@ -85,7 +85,7 @@ public class UserPersistenceJdbcTemplate implements UserPersistence {
     public void update(final User user,
                        final String id) {
         String sql = """
-                UPDATE user SET name = ?, phone_number = ?
+                UPDATE `users` SET name = ?, phone_number = ?
                 WHERE user_id = ?""";
         jdbcTemplate.update(sql, user.getName(), user.getPhoneNumber(), id);
     }
