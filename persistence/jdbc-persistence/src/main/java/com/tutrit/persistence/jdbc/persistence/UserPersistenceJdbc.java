@@ -14,7 +14,7 @@ import java.util.List;
 public class UserPersistenceJdbc implements UserPersistence {
 
     @Override
-    public User save(final User user) {
+    public User save(User user) {
         try {
             Connection con = new ConnectionProvider().getConnection();
         } catch (SQLException e) {

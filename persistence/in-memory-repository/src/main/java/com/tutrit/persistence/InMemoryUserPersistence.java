@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Component
-public final class InMemoryUserPersistence implements UserPersistence {
+public class InMemoryUserPersistence implements UserPersistence {
     private final Map<String, User> userMap = new HashMap<>();
 
     @Override

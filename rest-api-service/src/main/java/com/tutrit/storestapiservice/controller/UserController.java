@@ -1,9 +1,10 @@
 package com.tutrit.storestapiservice.controller;
 
+
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.storestapiservice.service.UserService;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,16 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getById(final @PathVariable String id) {
         return userService.findById(id);
+    }
+
+    /**
+     * Retrieves all users.
+     *
+     * @return A list of all users.
+     */
+    @GetMapping("/users")
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
     /**
@@ -84,4 +95,3 @@ public class UserController {
         return userService.findAll();
     }
 }
-
