@@ -85,13 +85,4 @@ public class UserController {
     public boolean delete(final @PathVariable String userId) {
         return userService.deleteById(userId);
     }
-    /**
-     * Retrieves a list of all users.
-     *
-     * @return A list containing all users.
-     */
-    @GetMapping("/users")
-    public List<User> findAll() {
-        return userService.findAll();
-    }
 }
