@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @Component
-public final class UserPersistenceJdbc implements UserPersistence {
+public class UserPersistenceJdbc implements UserPersistence {
 
     @Override
-    public User save(final User user)  {
+    public User save(User user) {
         try {
             Connection con = new ConnectionProvider().getConnection();
         } catch (SQLException e) {
@@ -25,6 +26,16 @@ public final class UserPersistenceJdbc implements UserPersistence {
 
     @Override
     public User findById(final String id) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<User> findAll() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean deleteById(final String userId) {
         throw new NotImplementedException();
     }
 }
