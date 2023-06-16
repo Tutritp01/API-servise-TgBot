@@ -54,7 +54,7 @@ public class UserController {
      * @return The updated user.
      * @throws AccessException If the provided user ID is invalid.
      */
-    @PutMapping
+    @PutMapping("/users/{userId}")
     public User update(
             final @RequestBody User user,
             final @RequestParam String userId) throws AccessException {
@@ -73,6 +73,15 @@ public class UserController {
     @DeleteMapping("/users/{userId}")
     public boolean delete(final @PathVariable String userId) {
         return userService.deleteById(userId);
+    }
+    /**
+     * Retrieves a list of all users.
+     *
+     * @return A list containing all users.
+     */
+    @GetMapping("/users")
+    public List<User> findAll() {
+        return userService.findAll();
     }
 }
 
