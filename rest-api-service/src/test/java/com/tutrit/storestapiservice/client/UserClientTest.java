@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +33,23 @@ class UserClientTest {
         when(userPersistence.findById("1")).thenReturn(expectedUser());
         var actualUser = userClient.findById("1");
         assertEquals(expectedUser(), actualUser);
+    }
+
+    @Test
+    void findAll() {
+        List<User> users = new ArrayList<>();
+        users.add(expectedUser());
+        users.add(expectedUser());
+        when(userPersistence.findAll()).thenReturn(users);
+        var actualUsers = userClient.findAll();
+        assertEquals(users, actualUsers);
+    }
+
+    @Test
+    void deleteById() {
+        when(userPersistence.deleteById("1")).thenReturn(true);
+        var result = userClient.deleteById("1");
+        assertTrue(result);
     }
 
     private User createNewUser() {
