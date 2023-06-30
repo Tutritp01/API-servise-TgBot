@@ -4,6 +4,8 @@ import com.tutrit.persistence.core.bean.User;
 import com.tutrit.storestapiservice.client.UserClient;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -31,5 +33,24 @@ public class UserService {
      */
     public User findById(final String id) {
         return userClient.findById(id);
+    }
+
+    /**
+     * Retrieves all users.
+     *
+     * @return The list of all users.
+     */
+    public List<User> findAll() {
+        return userClient.findAll();
+    }
+
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id The ID of the user to delete.
+     * @return true if the user was successfully deleted, false otherwise.
+     */
+    public boolean deleteById(final String id) {
+        return userClient.deleteById(id);
     }
 }
