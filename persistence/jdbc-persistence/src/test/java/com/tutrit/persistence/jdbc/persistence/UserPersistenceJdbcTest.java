@@ -104,3 +104,4 @@ class UserPersistenceJdbcTest {
         assertEquals(new User(null, null, null), findUser);
     }
 }
+

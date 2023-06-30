@@ -37,29 +37,4 @@ public class ConnectionProvider implements ConnectionInterfaces {
         }
     }
 
-
-    /*public void createServer() throws SQLException {
-        String JDBC_URL = "jdbc:h2:tcp://localhost/~/test"; // Change the database URL as per your requirement
-        String USERNAME = "sa"; // H2 default username
-        String PASSWORD = ""; // H2 default password
-        try {
-            // Start the H2 database server
-            Server server = Server.createTcpServer("-tcpAllowOthers").start();
-            System.out.println("H2 database server started.");
-
-            // Establish the JDBC connection
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-            System.out.println("Connected to the H2 database.");
-
-            // Perform database operations here
-
-            // Stop the H2 database server
-            server.stop();
-            System.out.println("H2 database server stopped.");
-
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to the H2 database: " + e.getMessage());
-        }
-    }*/
-
 }

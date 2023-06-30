@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-//@PropertySource(value = "classpath:application.properties")
 @Configuration
 public class ConnectionEmbeddedProvider implements ConnectionInterfaces {
 
@@ -31,6 +30,7 @@ public class ConnectionEmbeddedProvider implements ConnectionInterfaces {
         dataSource.setPassword(password);
         return dataSource;
     }
+
     @Override
     public Connection getConnection() {
         try {
@@ -41,3 +41,4 @@ public class ConnectionEmbeddedProvider implements ConnectionInterfaces {
     }
 
 }
+
