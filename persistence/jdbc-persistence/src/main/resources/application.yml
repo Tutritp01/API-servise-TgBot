@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: rest-api
-  config:
-    import: optional:configserver:http://3.124.0.23:8888/
-  profiles:
-    active: dev

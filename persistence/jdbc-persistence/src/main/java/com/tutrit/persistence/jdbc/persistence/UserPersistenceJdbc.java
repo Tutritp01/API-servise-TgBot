@@ -2,7 +2,9 @@ package com.tutrit.persistence.jdbc.persistence;
 
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.core.persistence.UserPersistence;
-import com.tutrit.persistence.jdbc.config.ConnectionProvider;
+import com.tutrit.persistence.jdbc.config.ConnectionInterfaces;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -14,14 +16,9 @@ import java.util.UUID;
 
 @Component
 public class UserPersistenceJdbc implements UserPersistence {
-    private final ConnectionProvider connectionProvider;
-
-    public UserPersistenceJdbc(final ConnectionProvider connectionProvider) {
-        this.connectionProvider = connectionProvider;
-    }
-    private static final int FIRST = 1;
-    private static final int SECOND = 2;
-    private static final int THIRD = 3;
+    @Autowired
+    @Qualifier("connectionProvider")
+    private ConnectionInterfaces connectionInterfaces;
 
     /**
      * Saves the user to the database. .
@@ -32,17 +29,17 @@ public class UserPersistenceJdbc implements UserPersistence {
     @Override
     public User save(final User user) {
         String sql = """
-                INSERT INTO user (user_id, name, phone_number)
+                INSERT INTO `user` (`user_id`, `name`, `phone_number`)
                 VALUES (?, ?, ?)""";
         user.setUserId(UUID.randomUUID().toString());
-        try (Connection connection = connectionProvider.getConnection();
+        try (Connection connection = connectionInterfaces.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(FIRST, user.getUserId());
-            ps.setString(SECOND, user.getName());
-            ps.setString(THIRD, user.getPhoneNumber());
-            ps.executeUpdate();
-            return user;
+            ps.setString(1, user.getUserId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getPhoneNumber());
+
+            return ps.executeUpdate() == 1 ? user : new User();
         } catch (SQLException e) {
             throw new RuntimeException("Error saving user to database: "
                     + e.getMessage(), e);
@@ -55,21 +52,21 @@ public class UserPersistenceJdbc implements UserPersistence {
      * @param id the ID of the user to retrieve
      * @return the user with the specified ID, or an empty user if not found
      * @throws RuntimeException if there is an error fetching the user from the
-     * database
+     *                          database
      */
     @Override
     public User findById(final String id) {
-        String sql = "SELECT * FROM user WHERE user_id = ?";
-        try (Connection connection = connectionProvider.getConnection();
+        String sql = "SELECT `user_id`, `name`, `phone_number` FROM `user` WHERE `user_id` = ?;";
+        try (Connection connection = connectionInterfaces.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setString(FIRST, id);
-            ResultSet resultSet = ps.executeQuery();
-            if (resultSet.next()) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
                 User user = new User();
-                user.setName(resultSet.getString("name"));
-                user.setPhoneNumber(resultSet.getString("phone_number"));
-                user.setUserId(resultSet.getString("user_id"));
+                user.setUserId(rs.getString(1));
+                user.setName(rs.getString(2));
+                user.setPhoneNumber(rs.getString(3));
                 return user;
             }
             return new User();
@@ -85,18 +82,18 @@ public class UserPersistenceJdbc implements UserPersistence {
      * @param user the updated user information
      * @param id   the ID of the user to update
      * @throws RuntimeException if there is an error updating the user
-     * in the database
+     *                          in the database
      */
     public void update(final User user, final String id) {
         String sql = """
-                UPDATE user SET name = ?, phone_number = ?
-                WHERE user_id = ?""";
-        try (Connection con = connectionProvider.getConnection();
+                UPDATE `user` SET `name` = ?, `phone_number` = ?
+                WHERE `user_id` = ?""";
+        try (Connection con = connectionInterfaces.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)
         ) {
-            ps.setString(FIRST, user.getName());
-            ps.setString(SECOND, user.getPhoneNumber());
-            ps.setString(THIRD, id);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPhoneNumber());
+            ps.setString(3, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -107,16 +104,17 @@ public class UserPersistenceJdbc implements UserPersistence {
 
     /**
      * Deletes a user from the database based on the specified ID.
+     *
      * @param id the ID of the user to delete
      * @throws RuntimeException if there is an error deleting
-     * the user from the database
+     *                          the user from the database
      */
     public void deleteById(final String id) {
-        String sql = "DELETE FROM user WHERE user_id = ?";
-        try (Connection connection = connectionProvider.getConnection();
+        String sql = "DELETE FROM `user` WHERE `user_id` = ?";
+        try (Connection connection = connectionInterfaces.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);
         ) {
-            ps.setString(FIRST, id);
+            ps.setString(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error delete user to database: "
