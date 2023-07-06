@@ -7,18 +7,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-
 @Configuration
 public class ConnectionProvider implements ConnectionInterfaces {
-    @Value("${datasource.uri:jdbc:mysql://localhost:3306/db}")
+    @Value("${datasource.uri:jdbc:mysql://localhost:3306/sto}")
     private String uri;
     @Value("${datasource.username:root}")
     private String username;
-    @Value("${datasource.password:password}")
+    @Value("${datasource.password:1234}")
     private String password;
     @Value("${datasource.driver-class-name:com.mysql.cj.jdbc.Driver}")
     private String driverClassName;
+
+    private Connection connection;
 
     /**
      * Obtain a database connection.
@@ -28,13 +28,14 @@ public class ConnectionProvider implements ConnectionInterfaces {
      */
     @Override
     public Connection getConnection() {
-
-        try {
-            Class.forName(driverClassName);
-            return DriverManager.getConnection(uri, username, password);
-        } catch (Exception ex) {
-            throw new RuntimeException("Error creating connection ");
+        if (connection == null) {
+            try {
+                Class.forName(driverClassName);
+                connection = DriverManager.getConnection(uri, username, password);
+            } catch (Exception ex) {
+                throw new RuntimeException("Error creating connection ");
+            }
         }
+        return connection;
     }
-
 }

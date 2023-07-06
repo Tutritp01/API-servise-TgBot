@@ -7,18 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.UUID;
+import java.sql.*;
+import java.util.List;
 
 
 @Component
 public class UserPersistenceJdbc implements UserPersistence {
+    public static final String CREATE_USER = "INSERT INTO `user` (`user_id`, `name`, `phone_number`) VALUES (?, ?, ?)";
+    public static final String UPDATE_USER = "UPDATE `user` SET `name` = ?, `phone_number` = ? WHERE `user_id` = ?";
+
+    UuidWrapper uuidWrapper;
+
     @Autowired
     @Qualifier("connectionProvider")
     private ConnectionInterfaces connectionInterfaces;
+
+    public void setUuidWrapper(UuidWrapper uuidWrapper) {
+        this.uuidWrapper = uuidWrapper;
+    }
 
     /**
      * Saves the user to the database. .
@@ -28,22 +34,36 @@ public class UserPersistenceJdbc implements UserPersistence {
      */
     @Override
     public User save(final User user) {
-        String sql = """
-                INSERT INTO `user` (`user_id`, `name`, `phone_number`)
-                VALUES (?, ?, ?)""";
-        user.setUserId(UUID.randomUUID().toString());
-        try (Connection connection = connectionInterfaces.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
+        String sql;
+        if (user.getUserId() == null) {
+            sql = CREATE_USER;
+            user.setUserId(uuidWrapper.randomUUID().toString());
+        } else {
+            sql = UPDATE_USER;
+        }
+
+
+        try {
+            Connection connection = connectionInterfaces.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUserId());
             ps.setString(2, user.getName());
             ps.setString(3, user.getPhoneNumber());
-
-            return ps.executeUpdate() == 1 ? user : new User();
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            String id = rs.getString(1);
+            return findById(id);
         } catch (SQLException e) {
-            throw new RuntimeException("Error saving user to database: "
-                    + e.getMessage(), e);
+            throw new RuntimeException(
+                    "Error saving user to database: " + e.getMessage(), e);
         }
+    }
+
+    private static String getKey(PreparedStatement ps) throws SQLException {
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        return rs.getString(1);
     }
 
     /**
@@ -109,7 +129,8 @@ public class UserPersistenceJdbc implements UserPersistence {
      * @throws RuntimeException if there is an error deleting
      *                          the user from the database
      */
-    public void deleteById(final String id) {
+    @Override
+    public boolean deleteById(final String id) {
         String sql = "DELETE FROM `user` WHERE `user_id` = ?";
         try (Connection connection = connectionInterfaces.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);
@@ -120,6 +141,11 @@ public class UserPersistenceJdbc implements UserPersistence {
             throw new RuntimeException("Error delete user to database: "
                     + e.getMessage(), e);
         }
+        return false;
     }
 
+    @Override
+    public List<User> findAll() {
+        return null;
+    }
 }

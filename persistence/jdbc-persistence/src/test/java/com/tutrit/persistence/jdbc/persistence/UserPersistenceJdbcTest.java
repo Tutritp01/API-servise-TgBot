@@ -2,6 +2,7 @@ package com.tutrit.persistence.jdbc.persistence;
 
 import com.tutrit.persistence.core.bean.User;
 import com.tutrit.persistence.jdbc.config.ConnectionInterfaces;
+import com.tutrit.persistence.jdbc.config.ConnectionProvider;
 import com.tutrit.persistence.jdbc.config.SpringContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +17,11 @@ import java.sql.Statement;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = SpringContext.SpringConfig.class)
 class UserPersistenceJdbcTest {
     @Autowired
-    @Qualifier("connectionEmbeddedProvider")
     private ConnectionInterfaces connectionInterfaces;
 
     @Autowired
@@ -65,19 +66,39 @@ class UserPersistenceJdbcTest {
     void setUp() {
         createTable(connectionInterfaces);
         insertUser(connectionInterfaces);
+        userPersistenceJdbc.setUuidWrapper(new UuidWrapperMock());
     }
 
     @AfterEach
     void tearDown() {
-        userPersistenceJdbc.deleteById("45c39ef0-2268-1111-aa93-a425be52eada");
+
     }
 
     @Test
-    void save() {
+    void save() throws SQLException {
+        connectionInterfaces.getConnection().setAutoCommit(false);
         String uuid = UUID.randomUUID().toString();
         User user = new User(uuid, "Jimer Hendrix", "5554-12345");
         User saveUser = userPersistenceJdbc.save(user);
         assertEquals(user, saveUser);
+        connectionInterfaces.getConnection().rollback();
+        connectionInterfaces.getConnection().setAutoCommit(true);
+    }
+
+    @Test
+    void saveNewUser() {
+        User saved = userPersistenceJdbc.save(nonPersistedUser());
+        assertEquals(expectedPersistedUser(), saved);
+    }
+
+    @Test
+    void updateNewUser() {
+        User saved = userPersistenceJdbc.save(nonPersistedUser());
+        saved.setName("Maks");
+        User expected = expectedPersistedUser();
+        expected.setName("Mikas");
+        User updated = userPersistenceJdbc.save(saved);
+        assertEquals(expected, updated);
     }
 
     @Test
@@ -102,6 +123,14 @@ class UserPersistenceJdbcTest {
         userPersistenceJdbc.deleteById("45c39ef0-2268-1111-aa93-a425be52eada");
         User findUser = userPersistenceJdbc.findById("45c39ef0-2268-1111-aa93-a425be52eada");
         assertEquals(new User(null, null, null), findUser);
+    }
+
+    private User expectedPersistedUser() {
+        return new User("45c39ef0-2268-0000-aa93-a425be52eada", "Mikas", null);
+    }
+
+    private User nonPersistedUser() {
+        return new User(null, "Mikas", null);
     }
 }
 
