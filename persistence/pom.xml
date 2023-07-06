@@ -18,10 +18,9 @@
             <artifactId>persistence-core</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.tutrit</groupId>
-            <artifactId>liquibase</artifactId>
+            <artifactId>jdbc-persistence</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
