@@ -10,12 +10,12 @@ import java.sql.SQLException;
 
 
 @Configuration
-public class ConnectionProvider implements ConnectionInterfaces {
-    @Value("${datasource.uri:jdbc:mysql://localhost:3306/db}")
+public class ConnectionProvider  {
+    @Value("${datasource.uri:jdbc:mysql://localhost:3306/sto}")
     private String uri;
     @Value("${datasource.username:root}")
     private String username;
-    @Value("${datasource.password:password}")
+    @Value("${datasource.password:1234}")
     private String password;
     @Value("${datasource.driver-class-name:com.mysql.cj.jdbc.Driver}")
     private String driverClassName;
@@ -26,7 +26,6 @@ public class ConnectionProvider implements ConnectionInterfaces {
      * @return A database connection object.
      * @throws SQLException If an error occurs while obtaining the connection.
      */
-    @Override
     public Connection getConnection() {
 
         try {
