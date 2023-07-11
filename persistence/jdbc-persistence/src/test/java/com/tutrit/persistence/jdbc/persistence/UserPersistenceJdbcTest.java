@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserPersistenceJdbcTest {
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS `user` (`user_id` VARCHAR(255) PRIMARY KEY,`name` VARCHAR(255),`phone_number` VARCHAR(255))";
     @Autowired
-    private ConnectionProvider connectionInterfaces;
+    private ConnectionProvider connectionProvider;
     @Autowired
     private UuidWrapperMock uuidWrapperMock;
     private UserPersistenceJdbc userPersistenceJdbc;
@@ -39,8 +39,8 @@ class UserPersistenceJdbcTest {
 
     @BeforeEach
     void setUp() {
-        userPersistenceJdbc = new UserPersistenceJdbc(connectionInterfaces, uuidWrapperMock);
-        createTable(connectionInterfaces);
+        userPersistenceJdbc = new UserPersistenceJdbc(connectionProvider, uuidWrapperMock);
+        createTable(connectionProvider);
         saved = userPersistenceJdbc.save(nonPersistedUser());
     }
 

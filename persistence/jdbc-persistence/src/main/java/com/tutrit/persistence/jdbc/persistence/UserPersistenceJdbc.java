@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
-import static java.util.UUID.randomUUID;
 
 
 @Component
@@ -21,13 +20,6 @@ public class UserPersistenceJdbc implements UserPersistence {
     public static final String FIND_BY_ID = "SELECT `user_id`, `name`, `phone_number` FROM `user` WHERE `user_id` = ?;";
     public static final String DELETE_USER = "DELETE FROM `user` WHERE `user_id` = ?";
     public static final String FIND_ALL = "SELECT `user_id`, `name`, `phone_number` FROM `user`";
-    /*@Autowired
-    private ConnectionProvider connectionProvider;
-    private UuidWrapper uuidWrapper;
-
-    public void setUuidWrapper(UuidWrapper uuidWrapper) {
-        this.uuidWrapper = uuidWrapper;
-    }*/
 
     private final ConnectionProvider connectionProvider;
     private final UuidWrapper uuidWrapper;
