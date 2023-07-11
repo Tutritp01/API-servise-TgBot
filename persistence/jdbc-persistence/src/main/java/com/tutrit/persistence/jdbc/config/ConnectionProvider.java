@@ -12,11 +12,13 @@ import java.sql.SQLException;
 @Configuration
 public class ConnectionProvider  {
     @Value("${datasource.uri:jdbc:mysql://localhost:3306/sto}")
-    private String uri = "jdbc:mysql://localhost:3306/sto";
+    private String uri;
     @Value("${datasource.username:root}")
-    private String username = "root";
+    private String username;
     @Value("${datasource.password:1234}")
-    private String password = "1234";
+    private String password;
+    @Value("${datasource.driver-class-name:com.mysql.cj.jdbc.Driver}")
+    private String driverClassName;
 
     /**
      * Obtain a database connection.
@@ -24,11 +26,14 @@ public class ConnectionProvider  {
      * @return A database connection object.
      * @throws SQLException If an error occurs while obtaining the connection.
      */
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() {
+
         try {
+            Class.forName(driverClassName);
             return DriverManager.getConnection(uri, username, password);
         } catch (Exception ex) {
-            return null;
+            throw new RuntimeException("Error creating connection ");
         }
     }
+
 }
